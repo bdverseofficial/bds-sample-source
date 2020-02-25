@@ -1,8 +1,8 @@
 <template>
-  <div class="home">    
+  <v-container pa-6 ma-6>    
     <h1>Home</h1>
     <div>{{helloworld}}</div>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
