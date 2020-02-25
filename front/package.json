@@ -1,0 +1,42 @@
+{
+  "name": "bds-sample-front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@bdverse/bds-sdk-vue": "^1.0.0-develop.62",
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.2",
+    "vue-property-decorator": "^8.3.0",
+    "vue-router": "^3.1.5",
+    "vuetify": "^2.2.14",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "@vue/cli-plugin-babel": "~4.2.0",
+    "@vue/cli-plugin-eslint": "~4.2.0",
+    "@vue/cli-plugin-router": "~4.2.0",
+    "@vue/cli-plugin-typescript": "~4.2.0",
+    "@vue/cli-service": "~4.2.0",
+    "@vue/eslint-config-typescript": "^5.0.1",
+    "deepmerge": "^4.2.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.1.2",
+    "fibers": "^4.0.2",
+    "node-sass": "^4.12.0",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.2",
+    "typescript": "~3.8.2",
+    "vue-cli-plugin-vuetify": "^2.0.2",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.4.3",
+    "@types/lodash": "^4.14.144"
+  }
+}

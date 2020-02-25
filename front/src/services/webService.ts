@@ -1,0 +1,61 @@
+import { ApiService, RouterService, ConfigService, ApiRequestConfig } from "@bdverse/bds-sdk-vue";
+import { B2CCustomer } from '@/models/bds';
+
+export interface WebStore {
+    ready?: boolean;
+    userReady?: boolean;
+}
+
+export interface WebOptions {
+
+}
+
+export class WebService {
+
+    private options: WebOptions = {
+    };
+
+    public store: WebStore = {
+        ready: false,
+        userReady: false,
+    };
+
+    private apiService: ApiService;
+    private routerService: RouterService;
+    private configService: ConfigService;
+
+    constructor(apiService: ApiService, routerService: RouterService, configService: ConfigService, options?: WebOptions) {
+        this.apiService = apiService;
+        this.routerService = routerService;
+        this.configService = configService;
+        this.options = options ? options : this.options;
+    }
+
+    async init(): Promise<void> {
+        if (!this.store.ready) {
+            this.store.ready = true;
+        }
+    }
+
+    async initUser(user?: any): Promise<void> {
+        this.store.userReady = false;
+        if (!this.store.ready) await this.init();        
+        this.store.userReady = true;
+    }    
+
+    async helloworld(options?: ApiRequestConfig): Promise<string | null> {
+        const response = await this.apiService.get('api/sample/v1/helloworld', options);
+        if (response) return response.data;
+        return null;
+    }
+
+    async register(customer: B2CCustomer, password: string,options?: ApiRequestConfig): Promise<B2CCustomer | null> {
+        const request = {
+            customer: customer,
+            password: password
+        };
+        const response = await this.apiService.post('api/cs/v1/b2c/registerCustomer', request, options);
+        if (response) return response.data;
+        return null;
+    }   
+}
