@@ -16,16 +16,16 @@ namespace BDVerse.Bds.Sample.Plugin.Services
     public class SampleService : ISampleService
     {
         private readonly IUserService userService;
-        private readonly IServerService serverService;
+        private readonly IClientApplicationService clientApplicationService;
 
         /// <summary>
         /// Constructor of the service, we get by injection the BDS IUserService
         /// </summary>
         /// <param name="userService"></param>        
-        public SampleService(IUserService userService, IServerService serverService) 
+        public SampleService(IUserService userService, IClientApplicationService clientApplicationService) 
         {
             this.userService = userService;            
-            this.serverService = serverService;            
+            this.clientApplicationService = clientApplicationService;            
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace BDVerse.Bds.Sample.Plugin.Services
         {                        
             if (member != null)
             {
-                var application = await serverService.GetAppConfig<ClientApplication>(SamplePlugin.APP_ID);
+                var application = await clientApplicationService.GetAppConfig<ClientApplication>(SamplePlugin.APP_ID);
                 if (String.IsNullOrWhiteSpace(member.Email)) throw new BdsException("BAD_REQUEST", "The email can not be null");
                 userService.AddUserRoleToSignIn(member, application.ToReferenceOrDefault());
                 member.IdentityProvider = IdentityProviderType.Default;

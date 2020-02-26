@@ -28,12 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BDVerse.Bds.Crm.Plugin.Sdk" Version="1.0.0-develop.437">
+    <PackageReference Include="BDVerse.Bds.Crm.Plugin.Sdk" Version="1.0.0-develop.451">
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>    
-    <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0-develop.437">
+    <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0-develop.451">
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>
       <IncludeAssets>compile</IncludeAssets>
