@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 using BDVerse.Bds.Sdk;
 using BDVerse.Bds.Sdk.Attributes;
 using BDVerse.Bds.Sdk.Controllers;
-using BDVerser.Bds.Sample.Plugin;
-using BDVerser.Bds.Sample.Plugin.Services;
+using BDVerse.Bds.Sample.Plugin;
+using BDVerse.Bds.Sample.Plugin.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BDVerse.Bds.Sdk.Models;
+using BDVerse.Bds.Sdk.Models.Services;
 
 namespace BDVerse.Bds.Sample.Plugin.Controllers
 {
@@ -43,7 +45,18 @@ namespace BDVerse.Bds.Sample.Plugin.Controllers
         public Task<string> HelloWorld()
         {
             return sampleService.HelloWorld();
-        }    
+        }   
+
+        /// <summary>
+        /// Add a custom search for searching only on sport
+        /// </summary>
+        [Route("search")]
+        [HttpPost]
+        [AllowAnonymous]        
+        public Task<SearchEntityResponse> Search([FromBody] SearchFullTextRequest request)
+        {            
+            return sampleService.SearchSport(request);
+        } 
 
     }
 }

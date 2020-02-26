@@ -16,6 +16,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="Data\Plugin.SAMPLE.Facet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Plugin.SAMPLE.SAMPLE.SportCategory.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Plugin.SAMPLE.SAMPLE.Sport.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BDVerse.Bds.Crm.Plugin.Sdk" Version="1.0.0-develop.437">
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>

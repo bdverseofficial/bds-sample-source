@@ -19,6 +19,7 @@ The plugin is defining a new Client Application named SAMPLE.
 The plugin will create an API User for this client application.
 The plugin expose the operations:
 - /api/sample/v1/helloworld : Return an hello world message
+- /api/sample/v1/search: Search a sport
 
 ## Front End
 

@@ -1,8 +1,10 @@
 using System;
 using System.Threading.Tasks;
 using BDVerse.Bds.Sdk.Attributes;
+using BDVerse.Bds.Sdk.Models;
+using BDVerse.Bds.Sdk.Models.Services;
 
-namespace BDVerser.Bds.Sample.Plugin.Services
+namespace BDVerse.Bds.Sample.Plugin.Services
 {
 
     [Service]
@@ -11,5 +13,7 @@ namespace BDVerser.Bds.Sample.Plugin.Services
         Task InitClientApplication();
 
         Task<string> HelloWorld();
+
+        Task<SearchEntityResponse> SearchSport(SearchFullTextRequest request);
     }
 }

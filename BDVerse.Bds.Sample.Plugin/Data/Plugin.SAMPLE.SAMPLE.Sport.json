@@ -1,0 +1,158 @@
+[
+    {
+        "id": "SKIING",
+        "name": "Skiing",
+        "localName": {
+            "en": "Skiing"
+        },
+        "groupType": "SOLO",
+        "groupSize": 1,
+        "category": {
+            "id": "OUTDOOR.SNOW",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "HOCKEY",
+        "name": "Hockey",
+        "localName": {
+            "en": "Hockey"
+        },
+        "groupType": "TEAM",
+        "groupSize": 12,
+        "category": {
+            "id": "INDOOR.FIELD",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "BASKETBALL",
+        "name": "Basketball",
+        "localName": {
+            "en": "Basketball"
+        },
+        "groupType": "TEAM",
+        "groupSize": 10,
+        "category": {
+            "id": "INDOOR.FIELD",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "BASEBALL",
+        "name": "Baseball",
+        "localName": {
+            "en": "Baseball"
+        },
+        "groupType": "TEAM",
+        "groupSize": 18,
+        "category": {
+            "id": "OUTDOOR.FIELD",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "SOCCER",
+        "name": "Soccer",
+        "localName": {
+            "en": "Soccer"
+        },
+        "groupType": "TEAM",
+        "groupSize": 22,
+        "category": {
+            "id": "OUTDOOR.FIELD",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "TENNIS",
+        "name": "Tennis",
+        "localName": {
+            "en": "Tennis"
+        },
+        "groupType": "DUAL",
+        "groupSize": 2,
+        "category": {
+            "id": "OUTDOOR.FIELD",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "SWIMING",
+        "name": "Swiming",
+        "localName": {
+            "en": "Swiming"
+        },
+        "groupType": "SOLO",
+        "groupSize": 1,
+        "category": {
+            "id": "INDOOR.WATER",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "WATERPOLO",
+        "name": "Waterpolo",
+        "localName": {
+            "en": "Waterpolo"
+        },
+        "groupType": "TEAM",
+        "groupSize": 14,
+        "category": {
+            "id": "INDOOR.WATER",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "DIVING",
+        "name": "Diving",
+        "localName": {
+            "en": "Diving"
+        },
+        "groupType": "SOLO",
+        "groupSize": 1,
+        "category": {
+            "id": "INDOOR.WATER",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "WATERSKIING",
+        "name": "Water Skiing",
+        "localName": {
+            "en": "Water Skiing"
+        },
+        "groupType": "SOLO",
+        "groupSize": 1,
+        "category": {
+            "id": "OUTDOOR.WATER",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "SCUBADIVING",
+        "name": "Scuba Diving",
+        "localName": {
+            "en": "Scuba Diving"
+        },
+        "groupType": "GROUP",
+        "groupSize": 2,
+        "category": {
+            "id": "OUTDOOR.WATER",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "SAILING",
+        "name": "Sailing",
+        "localName": {
+            "en": "Sailing"
+        },
+        "groupType": "GROUP",
+        "groupSize": 10,
+        "category": {
+            "id": "OUTDOOR.WATER",
+            "type": "SAMPLE.SportCategory"
+        }
+    }             
+]

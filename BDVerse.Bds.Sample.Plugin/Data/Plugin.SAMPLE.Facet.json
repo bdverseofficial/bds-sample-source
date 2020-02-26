@@ -1,0 +1,39 @@
+[
+    {
+        "id": "sample.sport.groupType",
+        "name": "Type of group",
+        "localName": {
+          "en": "Type of group"
+        },
+        "values": [
+          {
+            "name": "Solo",
+            "localName": {
+              "en": "Solo"
+            },
+            "value": "SOLO"
+          },
+          {
+            "name": "Dual",
+            "localName": {
+              "en": "Dual"
+            },
+            "value": "DUAL"
+          },
+          {
+            "name": "Group",
+            "localName": {
+              "en": "Group"
+            },
+            "value": "GROUP"
+          },
+          {
+            "name": "Team",
+            "localName": {
+              "en": "Team"
+            },
+            "value": "TEAM"
+          }
+        ]
+      }
+]

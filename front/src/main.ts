@@ -31,7 +31,8 @@ const options: WebAppOptions = {
   // Router Options
   router: {
     routes: [
-      { name: 'Home', path: '/', meta: { auth: false }, component: view('Home') },      
+      { name: 'Root', path: '/', meta: { auth: false }, redirect: { name: "Home"} },      
+      { name: 'Home', path: '/home', meta: { auth: false }, component: view('Home') },      
       { name: 'About', path: '/about', meta: { auth: false }, component: view('About') },      
       { name: 'Login', path: '/login', meta: { auth: false }, component: view('Login/Login') },      
       {
@@ -44,6 +45,7 @@ const options: WebAppOptions = {
       { name: 'resetpassword', path: '/resetpassword', meta: { auth: false }, component: view('Login/ResetPassword') },      
       { name: 'register', path: '/register', meta: { auth: false }, component: view('Login/Register') },      
       { name: 'activation', path: '/activation', meta: { auth: false }, component: view('Login/Activation') },
+      { name: 'Search', path: '/search', meta: { auth: false }, component: view('Search/Search'), props: (route) => ({ query: route.query.q, sort: route.query.s }) },
     ]
   },
   // Authentication options

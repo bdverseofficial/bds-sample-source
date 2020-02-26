@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using BDVerse.Bds.Sdk.Attributes;
 using BDVerse.Bds.Sdk.Models.Metadata;
 using BDVerse.Bds.Sdk.Services;
-using BDVerser.Bds.Sample.Plugin.Services;
+using BDVerse.Bds.Sample.Plugin.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BDVerser.Bds.Sample.Plugin
+namespace BDVerse.Bds.Sample.Plugin
 {
     /// <summary>
     /// The Sample Plugin:
@@ -24,7 +24,7 @@ namespace BDVerser.Bds.Sample.Plugin
         /*
             Define some overall const for the plugin
         */
-        
+
         public const string PLUGIN_ID = "SAMPLE";
         public const string APP_ID = "SAMPLE";
         public const string APP_NAME = "Sample App";

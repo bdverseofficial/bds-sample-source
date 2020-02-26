@@ -1,8 +1,11 @@
 using System.Threading.Tasks;
+using BDVerse.Bds.Sample.Plugin.Models;
 using BDVerse.Bds.Sdk.Attributes;
+using BDVerse.Bds.Sdk.Models;
+using BDVerse.Bds.Sdk.Models.Services;
 using BDVerse.Bds.Sdk.Services;
 
-namespace BDVerser.Bds.Sample.Plugin.Services
+namespace BDVerse.Bds.Sample.Plugin.Services
 {
     /// <summary>
     /// The main sample service, this one is registered automaticly with the ServiceAttribute on all interface with the ServiceAtribute
@@ -11,14 +14,18 @@ namespace BDVerser.Bds.Sample.Plugin.Services
     public class SampleService : ISampleService
     {
         private readonly IUserService userService;
+        private readonly IAppService appService;
+        private readonly IBdsObjectMetadataService metadataService;
 
         /// <summary>
-        /// Constructor of the service, we get by injection the BDS IUserService
+        /// Constructor of the service, we get by injection the BDS IUserService and IAppService
         /// </summary>
         /// <param name="userService"></param>        
-        public SampleService(IUserService userService) 
+        public SampleService(IUserService userService, IAppService appService, IBdsObjectMetadataService metadataService) 
         {
             this.userService = userService;
+            this.appService = appService;
+            this.metadataService = metadataService;
         }
 
         /// <summary>
@@ -36,6 +43,13 @@ namespace BDVerser.Bds.Sample.Plugin.Services
         public Task<string> HelloWorld() 
         {
             return Task.FromResult("Hello World From the BDS Sample Plugin");
+        }
+
+        public async Task<SearchEntityResponse> SearchSport(SearchFullTextRequest request)
+        {                    
+            var sportEntity = metadataService.GetEntity<Sport>();
+            var result = await appService.Search(request, null, sportEntity);
+            return result;            
         }
     }
 }

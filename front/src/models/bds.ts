@@ -11,6 +11,7 @@ export interface SearchRequest {
     scroll?: boolean;
     scrollId?: string;
     filter?: string;
+    filterFacetsIfNotCategoryLeaf?: boolean;
 }
 
 export interface SearchItem {

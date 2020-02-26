@@ -32,7 +32,8 @@
     },
     "APP": {
         "HOME": "Home",
-        "About": "About",        
+        "ABOUT": "About",      
+        "SEARCH": "Search",
         "SIGNIN": "Register Or Sign In"        
     },
     "REGISTER": {
@@ -95,5 +96,14 @@
         "BTN_UPDATE_ACCOUNT": "Update Account",
         "CODE_REQUIRED": "Challenge code is required",
         "CANCEL": "Cancel"
+    },
+    "SEARCH": {
+        "GROUPS": "Categories",
+        "FILTERS": "Filters",
+        "ORDER": "Sort",
+        "GROUPSIZE_DOWN": "Group Size",
+        "GROUPSIZE_UP": "Group Size Desc",
+        "GROUPSIZE": "Number of person",
+        "GROUPTYPE": "Type"
     }
 }

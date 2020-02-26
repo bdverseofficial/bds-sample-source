@@ -9,17 +9,10 @@
                 <v-app-bar-nav-icon
                   v-if="appStore"                  
                   @click.stop="drawer = !drawer"
-                ></v-app-bar-nav-icon>                               
+                ></v-app-bar-nav-icon>                                               
 
-                <template>
-                  <v-toolbar-items>
-                    <v-btn text :to="{name: 'Home'}">{{$t("APP.HOME")}}</v-btn>
-                  </v-toolbar-items>
-
-                  <v-toolbar-items>
-                    <v-btn text :to="{name: 'About'}">{{$t("APP.About")}}</v-btn>
-                  </v-toolbar-items>
-                </template>
+                <v-toolbar-title>{{options.title}}
+                </v-toolbar-title>
 
                 <v-spacer></v-spacer>              
 
@@ -71,13 +64,21 @@
                   </v-menu>
                 </v-toolbar-items>                
               </v-app-bar>
-              <v-navigation-drawer app dark clipped v-model="drawer">  
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="title">
-                      {{options.title}}
-                    </v-list-item-title>                    
-                  </v-list-item-content>
+              <v-navigation-drawer app dark clipped v-model="drawer">                  
+                <v-list-item :to="{name: 'Home'}">
+                  <v-list-item-title>
+                    {{$t("APP.HOME")}}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item :to="{name: 'Search'}">
+                  <v-list-item-title>
+                    {{$t("APP.SEARCH")}}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item :to="{name: 'About'}">
+                  <v-list-item-title>
+                    {{$t("APP.ABOUT")}}
+                  </v-list-item-title>
                 </v-list-item>
               </v-navigation-drawer>
               <router-view class="content"></router-view>

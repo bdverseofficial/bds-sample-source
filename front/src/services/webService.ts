@@ -1,5 +1,5 @@
 import { ApiService, RouterService, ConfigService, ApiRequestConfig } from "@bdverse/bds-sdk-vue";
-import { B2CCustomer } from '@/models/bds';
+import { B2CCustomer, SearchEntityResponse } from '@/models/bds';
 
 export interface WebStore {
     ready?: boolean;
@@ -57,5 +57,24 @@ export class WebService {
         const response = await this.apiService.post('api/cs/v1/b2c/registerCustomer', request, options);
         if (response) return response.data;
         return null;
-    }   
+    }  
+    
+    public async search(request: any): Promise<SearchEntityResponse | null> {
+        let options = {
+            headers: {
+                filters: [
+                    "Facet:name|localName",
+                    "FacetValue:name|localName",
+                    "SAMPLE.SportCategory:name|localName",                    
+                    "SAMPLE.Sport:name|localName|id|groupType|groupSize",                    
+                ]
+            }
+        };
+        const response = await this.apiService.post(
+            "api/sample/v1/search",
+            request,
+            options
+        );
+        return response.data;
+    }
 }
