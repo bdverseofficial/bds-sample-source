@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using BDVerse.Bds.Sample.Plugin.Models;
 using BDVerse.Bds.Sdk.Attributes;
+using BDVerse.Bds.Sdk.Enums;
 using BDVerse.Bds.Sdk.Models;
 using BDVerse.Bds.Sdk.Models.Services;
 using BDVerse.Bds.Sdk.Services;
@@ -14,18 +16,16 @@ namespace BDVerse.Bds.Sample.Plugin.Services
     public class SampleService : ISampleService
     {
         private readonly IUserService userService;
-        private readonly IAppService appService;
-        private readonly IBdsObjectMetadataService metadataService;
+        private readonly IServerService serverService;
 
         /// <summary>
-        /// Constructor of the service, we get by injection the BDS IUserService, IAppService and IBdsObjectMetadataService
+        /// Constructor of the service, we get by injection the BDS IUserService
         /// </summary>
         /// <param name="userService"></param>        
-        public SampleService(IUserService userService, IAppService appService, IBdsObjectMetadataService metadataService) 
+        public SampleService(IUserService userService, IServerService serverService) 
         {
-            this.userService = userService;
-            this.appService = appService;
-            this.metadataService = metadataService;
+            this.userService = userService;            
+            this.serverService = serverService;            
         }
 
         /// <summary>
@@ -47,20 +47,28 @@ namespace BDVerse.Bds.Sample.Plugin.Services
         public Task<string> HelloWorld() 
         {
             return Task.FromResult("Hello World From the BDS Sample Plugin");
-        }
+        }      
 
         /// <summary>
-        /// Search implementation, just apply a restriction on the type of documents requested
-        /// This is allowing to modify request parameters or adding more
-        /// Can add root category or internal filters
+        /// Register a member by using the default identity provider included in BDS
+        /// Add default roles for the app
+        /// No activation is requested
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="member"></param>
+        /// <param name="password"></param>        
         /// <returns></returns>
-        public async Task<SearchEntityResponse> SearchSport(SearchFullTextRequest request)
-        {                    
-            var sportEntity = metadataService.GetEntity<Sport>();
-            var result = await appService.Search(request, null, sportEntity);
-            return result;            
-        }
+        public async Task<Member> Register(Member member, string password)
+        {                        
+            if (member != null)
+            {
+                var application = await serverService.GetAppConfig<ClientApplication>(SamplePlugin.APP_ID);
+                if (String.IsNullOrWhiteSpace(member.Email)) throw new BdsException("BAD_REQUEST", "The email can not be null");
+                userService.AddUserRoleToSignIn(member, application.ToReferenceOrDefault());
+                member.IdentityProvider = IdentityProviderType.Default;
+                member.Password = password;               
+                return await userService.RegisterUser(member, true, null);
+            }
+            return null;
+        }  
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BDVerse.Bds.Sdk.Models;
 using BDVerse.Bds.Sdk.Models.Services;
+using BDVerse.Bds.Sample.Plugin.Models;
 
 namespace BDVerse.Bds.Sample.Plugin.Controllers
 {
@@ -45,18 +46,31 @@ namespace BDVerse.Bds.Sample.Plugin.Controllers
         public Task<string> HelloWorld()
         {
             return sampleService.HelloWorld();
-        }   
+        }    
 
         /// <summary>
-        /// Add a custom search for searching only on sport
+        /// Define the request expected
         /// </summary>
-        [Route("search")]
-        [HttpPost]
-        [AllowAnonymous]        
-        public Task<SearchEntityResponse> Search([FromBody] SearchFullTextRequest request)
-        {            
-            return sampleService.SearchSport(request);
-        } 
+        public class RegisterRequest
+        {
+            public Member Member { get; set; }
 
+            public string Password { get; set; }
+        }
+
+        /// <summary>
+        /// Register a member
+        /// Can be replaced by using directly /api/cs/v1/b2ccustomer/registerCustomer in the CS plugin, in that case Member must inherit B2CCustomer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [Route("register")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<Member> Register([FromBody] RegisterRequest request)
+        {
+            if (request == null) throw new ApiException(System.Net.HttpStatusCode.BadRequest, "REQUESTEMPTY", "Request is empty");            
+            return await sampleService.Register(request.Member, request.Password);
+        }              
     }
 }

@@ -32,17 +32,7 @@
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>
       <IncludeAssets>compile</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="BDVerse.Bds.Cs.Plugin.Sdk" Version="1.0.0-develop.437">
-      <Private>false</Private>
-      <PrivateAssets>All</PrivateAssets>
-      <IncludeAssets>compile</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="BDVerse.Bds.Pim.Plugin.Sdk" Version="1.0.0-develop.437">
-      <Private>false</Private>
-      <PrivateAssets>All</PrivateAssets>
-      <IncludeAssets>compile</IncludeAssets>
-    </PackageReference>
+    </PackageReference>    
     <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0-develop.437">
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>

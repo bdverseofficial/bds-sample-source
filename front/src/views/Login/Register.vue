@@ -11,7 +11,7 @@
                 :label="$t('USER.FIELD_FIRST_NAME')"
                 type="text"
                 :rules="[ v => !!v || 'First Name is required']"
-                v-model="customer.firstName"
+                v-model="member.firstName"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
@@ -20,7 +20,7 @@
                 :label="$t('USER.FIELD_LAST_NAME')"
                 type="text"
                 :rules="[ v => !!v || 'Last Name is required']"
-                v-model="customer.lastName"
+                v-model="member.lastName"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
@@ -31,7 +31,7 @@
                 item-text="phoneExtensionName"
                 item-value="phoneExtension"
                 menu-props="auto"
-                v-model="customer.personal.mobilePhone.countryPhoneExt"
+                v-model="member.personal.mobilePhone.countryPhoneExt"
               ></v-select>
             </v-col>
             <v-col cols="12" md="6">
@@ -39,7 +39,7 @@
                 name="mobilephone"
                 :label="$t('USER.FIELD_MOBILE_PHONE')"
                 type="text"
-                v-model="customer.personal.mobilePhone.number"
+                v-model="member.personal.mobilePhone.number"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -48,7 +48,7 @@
                 :label="$t('USER.FIELD_EMAIL')"
                 type="text"
                 :rules="[ v => !!v || 'E-mail is required',  v => /.+@.+\..+/.test(v) || 'E-mail must be valid' ]"
-                v-model="customer.email"
+                v-model="member.email"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
@@ -56,7 +56,7 @@
                 name="company"
                 :label="$t('USER.FIELD_COMPANY')"
                 type="text"
-                v-model="customer.professional.company.name"
+                v-model="member.professional.company.name"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
@@ -64,7 +64,7 @@
                 name="jobtitle"
                 :label="$t('USER.FIELD_JOBTITLE')"
                 type="text"
-                v-model="customer.professional.jobTitle"
+                v-model="member.professional.jobTitle"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -76,7 +76,7 @@
                 item-value="id"
                 return-object
                 :rules="[ v => !!v || 'Country is required']"
-                v-model="customer.address.country"
+                v-model="member.address.country"
               ></v-select>
             </v-col>
             <v-col cols="12" md="6">
@@ -123,7 +123,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { B2CCustomer } from "@/models/bds";
+import { Member } from "@/models/bds";
 import { Reference, BdsEntity, User } from "@bdverse/bds-sdk-vue";
 import PageLayout from "../PageLayout.vue";
 
@@ -148,7 +148,7 @@ export default class Register extends Vue {
     );
   }
 
-  private customer: B2CCustomer = {
+  private member: Member = {
     personal: {
       mobilePhone: {}
     },
@@ -163,7 +163,7 @@ export default class Register extends Vue {
     if (this.valid) {
       this.loading = true;
       try {
-        await this.$app.webService.register(this.customer,this.password!);
+        await this.$app.webService.register(this.member,this.password!);
         this.$app.routerService.back();
       } finally {
         this.loading = false;

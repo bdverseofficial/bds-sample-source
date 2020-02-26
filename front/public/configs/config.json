@@ -10,5 +10,5 @@
       "fr"
     ],
     "refreshTokenTimeSpanSecond": 20000,
-    "userTypeName": "CS.B2CCustomer"    
+    "userTypeName": "SAMPLE.Member"    
   }

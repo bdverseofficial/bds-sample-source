@@ -61,5 +61,5 @@ export interface Account extends Lead {
 export interface Person extends Account {
 }
 
-export interface B2CCustomer extends Person {
+export interface Member extends Person {
 }

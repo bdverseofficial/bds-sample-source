@@ -15,9 +15,7 @@ namespace BDVerse.Bds.Sample.Plugin
     /// - Declare a new client application
     /// </summary>
     [Plugin(Id = PLUGIN_ID, Name = "Sample Plugin", NeedLicence = false, VersionStr = "1.0.0.0")]
-    [Dependency(PluginId = "CRM")]
-    [Dependency(PluginId = "PIM")]
-    [Dependency(PluginId = "CS")]
+    [Dependency(PluginId = "CRM")]    
     [ClientApplication(Id = APP_ID, Name = APP_NAME, UserTypes = USER_TYPES, Roles = USER_ROLES)]
     public class SamplePlugin : BdsPlugin
     {
@@ -28,7 +26,7 @@ namespace BDVerse.Bds.Sample.Plugin
         public const string PLUGIN_ID = "SAMPLE";
         public const string APP_ID = "SAMPLE";
         public const string APP_NAME = "Sample App";
-        public const string USER_TYPES = "CS.B2CCustomer";
+        public const string USER_TYPES = "SAMPLE.Member";
         public const string USER_ROLES = "";
         public const string API_USERNAME = "SAMPLEAPI";
         public const string API_USER_DISPLAYNAME = "SAMPLE API User";
