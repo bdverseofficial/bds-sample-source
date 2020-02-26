@@ -18,7 +18,7 @@ namespace BDVerse.Bds.Sample.Plugin.Services
         private readonly IBdsObjectMetadataService metadataService;
 
         /// <summary>
-        /// Constructor of the service, we get by injection the BDS IUserService and IAppService
+        /// Constructor of the service, we get by injection the BDS IUserService, IAppService and IBdsObjectMetadataService
         /// </summary>
         /// <param name="userService"></param>        
         public SampleService(IUserService userService, IAppService appService, IBdsObjectMetadataService metadataService) 
@@ -40,11 +40,22 @@ namespace BDVerse.Bds.Sample.Plugin.Services
             return this.userService.CreateSystemApiUser(SamplePlugin.APP_ID, SamplePlugin.API_USERNAME, SamplePlugin.API_USER_DISPLAYNAME, SamplePlugin.API_USER_PASSWORD);
         }
 
+        /// <summary>
+        /// Typical HelloWorld
+        /// </summary>
+        /// <returns></returns>
         public Task<string> HelloWorld() 
         {
             return Task.FromResult("Hello World From the BDS Sample Plugin");
         }
 
+        /// <summary>
+        /// Search implementation, just apply a restriction on the type of documents requested
+        /// This is allowing to modify request parameters or adding more
+        /// Can add root category or internal filters
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<SearchEntityResponse> SearchSport(SearchFullTextRequest request)
         {                    
             var sportEntity = metadataService.GetEntity<Sport>();
