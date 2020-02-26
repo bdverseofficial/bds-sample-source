@@ -7,9 +7,8 @@
             <v-container fluid pa-0 ma-0 full-height>
               <v-app-bar dark clipped-left clipped-right app>
                 <v-app-bar-nav-icon
-                  v-if="appStore"
-                  :disabled="!appStore.drawerVisible"
-                  @click.stop="appStore.drawer = !appStore.drawer"
+                  v-if="appStore"                  
+                  @click.stop="drawer = !drawer"
                 ></v-app-bar-nav-icon>                               
 
                 <template>
@@ -72,6 +71,15 @@
                   </v-menu>
                 </v-toolbar-items>                
               </v-app-bar>
+              <v-navigation-drawer app dark clipped v-model="drawer">  
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title class="title">
+                      {{options.title}}
+                    </v-list-item-title>                    
+                  </v-list-item-content>
+                </v-list-item>
+              </v-navigation-drawer>
               <router-view class="content"></router-view>
             </v-container>
           </transition>
@@ -88,7 +96,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { ProfileStore } from "@bdverse/bds-sdk-vue";
 import { WebStore } from "./services/webService";
-import { WebAppStore } from "./webApp";
+import { WebAppStore, WebAppOptions } from "./webApp";
 import MainDialog from "./views/Dialog/MainDialog.vue";
 import MainMessage from "./views/Dialog/MainMessage.vue";
 
@@ -100,11 +108,14 @@ export default class App extends Vue {
   profileStore: ProfileStore | null = null;
   webStore: WebStore | null = null;  
   appStore: WebAppStore | null = null;
+  drawer: boolean | null = null;
+  options: WebAppOptions | null = null;
 
   created() {
     this.profileStore = this.$app.profileService.store;
     this.webStore = this.$app.webService.store;
     this.appStore = this.$app.store;
+    this.options = this.$app.options;
   }
 
   async signOut() {

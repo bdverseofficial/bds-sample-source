@@ -1,19 +1,34 @@
+/*
+  The main will defined all the options for the bds-sdk-vue, start the bds main services, and launch the vue app
+*/
 import Vue from 'vue';
 import BdsVuetify from './plugins/vuetify';
 import App from './App.vue';
 import { WebApp, WebAppOptions } from './webApp';
 import "./scss/main.scss";
 
+/*
+Helper for lazy loading a view
+*/
 function view(name: string) {
   return () => import('./views/' + name + '.vue');
 }
 
-let options: WebAppOptions = {
-  title: "BDVerse Sport",
+/*
+Define the main options for the WebApp
+*/
+const options: WebAppOptions = {
+  // Title of the Web App
+  title: "BDVerse Sample",
+
+  // Api options
   api: {
+    // We do not throw errors for unexpected exception
     throwOnlyCustomError: true,
+    // We ask BDS to managed the translation on every entity containing some LocalizedString
     applyTranslation: true
   },
+  // Router Options
   router: {
     routes: [
       { name: 'Home', path: '/', meta: { auth: false }, component: view('Home') },      
@@ -31,13 +46,17 @@ let options: WebAppOptions = {
       { name: 'activation', path: '/activation', meta: { auth: false }, component: view('Login/Activation') },
     ]
   },
+  // Authentication options
   auth: {
+    // At the launch of the app, we will use the local or session storage to identify the current user
     refreshOnInit: true,
   },
 };
 
+// Create the Web App
 const web = new WebApp(options);
 
+// Initialize the Web App and start vue
 web.init().then(() => {
   const bdsVuetify = new BdsVuetify(web.translationService.i18n);  
   const vue = new Vue({
