@@ -11,7 +11,7 @@ The front part can be build using yarn command:
 - yarn build or yarn serve
 Check the config.json in ./public/configs/, to ensure the connection to your BDS server.
 
-By using Visual Studio Code you cn easily debug your plugin running in the container. Open vscode, open the folder bds-sample-source, hit F5, select the process dotnet in the container. You can put a breackpoint where you need.
+By using Visual Studio Code you can debug your plugin running in the container. Open vscode, open the folder bds-sample-source, hit F5, select the process dotnet in the container. You can put a breackpoint where you need.
 
 ## Plugin
 
