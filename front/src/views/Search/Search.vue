@@ -187,7 +187,7 @@ export default class Search extends Vue {
         ? this.sort.split("|")[1] === "true"
         : false
       : undefined;
-    this.request.filter = "type=SAMPLE.Sport";
+    //this.request.filter = "type=SAMPLE.Sport";
     let hits = await this.$app.webService.search(this.request);
     if (hits && hits.items.length > 0) {
       if (!scrollId) {

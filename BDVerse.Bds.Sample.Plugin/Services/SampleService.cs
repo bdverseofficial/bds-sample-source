@@ -15,17 +15,15 @@ namespace BDVerse.Bds.Sample.Plugin.Services
     [Service]
     public class SampleService : ISampleService
     {
-        private readonly IUserService userService;
-        private readonly IClientApplicationService clientApplicationService;
+        private readonly IServerService server;        
 
         /// <summary>
-        /// Constructor of the service, we get by injection the BDS IUserService
+        /// Constructor of the service, we get by injection the BDS IServerService
         /// </summary>
         /// <param name="userService"></param>        
-        public SampleService(IUserService userService, IClientApplicationService clientApplicationService) 
+        public SampleService(IServerService server) 
         {
-            this.userService = userService;            
-            this.clientApplicationService = clientApplicationService;            
+            this.server = server;                     
         }
 
         /// <summary>
@@ -37,7 +35,7 @@ namespace BDVerse.Bds.Sample.Plugin.Services
         /// <returns></returns>
         public Task InitClientApplication()
         {            
-            return this.userService.CreateSystemApiUser(SamplePlugin.APP_ID, SamplePlugin.API_USERNAME, SamplePlugin.API_USER_DISPLAYNAME, SamplePlugin.API_USER_PASSWORD);
+            return server.User.CreateSystemApiUser(SamplePlugin.APP_ID, SamplePlugin.API_USERNAME, SamplePlugin.API_USER_DISPLAYNAME, SamplePlugin.API_USER_PASSWORD);
         }
 
         /// <summary>
@@ -61,12 +59,12 @@ namespace BDVerse.Bds.Sample.Plugin.Services
         {                        
             if (member != null)
             {
-                var application = await clientApplicationService.GetAppConfig<ClientApplication>(SamplePlugin.APP_ID);
+                var application = await server.ClientApplication.GetAppConfig<ClientApplication>();
                 if (String.IsNullOrWhiteSpace(member.Email)) throw new BdsException("BAD_REQUEST", "The email can not be null");
-                userService.AddUserRoleToSignIn(member, application.ToReferenceOrDefault());
+                server.User.AddUserRoleToSignIn(member, application.ToReferenceOrDefault());
                 member.IdentityProvider = IdentityProviderType.Default;
                 member.Password = password;               
-                return await userService.RegisterUser(member, true, null);
+                return await server.User.RegisterUser(member, true, null);
             }
             return null;
         }  
