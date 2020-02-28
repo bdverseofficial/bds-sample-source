@@ -1,190 +1,190 @@
-<template>  
-  <v-container pa-6 ma-6>    
-      <template v-if="viewMode == 'SignIn'">
-        <h2>{{$t('LOGIN.TITLE')}}</h2>
-        <h3>{{$t('LOGIN.SUBTITLE_LOGIN')}}</h3>
-        <v-form v-model="valid">
+<template>
+  <v-container pa-6 ma-6>
+    <template v-if="viewMode == 'SignIn'">
+      <h2>{{$t('LOGIN.TITLE')}}</h2>
+      <h3>{{$t('LOGIN.SUBTITLE_LOGIN')}}</h3>
+      <v-form v-model="valid">
+        <v-text-field
+          prepend-icon="email"
+          name="login"
+          :label="$t('LOGIN.FIELD_EMAIL')"
+          type="text"
+          v-model="userName"
+          :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
+        ></v-text-field>
+        <v-text-field
+          id="password"
+          name="password"
+          prepend-icon="lock"
+          :label="$t('LOGIN.FIELD_PASSWORD')"
+          v-model="password"
+          :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+          :type="showPassword ? 'text' : 'password'"
+          :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
+          @keyup.enter.native="login"
+          @click:append="showPassword = !showPassword"
+        ></v-text-field>
+        <v-switch v-model="rememberMe" :label="$t('LOGIN.REMEMBER_ME')"></v-switch>
+      </v-form>
+      <div style="clear:both">
+        <v-btn text :to="{name: 'register'}">{{$t("LOGIN.SIGNIN")}}</v-btn>
+        <v-btn text @click="viewMode = 'ForgotPassword'">{{$t("LOGIN.FORGOT_PASSWORD")}}</v-btn>
+        <v-btn
+          color="primary"
+          @click="login"
+          :disabled="!valid || loading"
+          :loading="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_LOGIN")}}</v-btn>
+      </div>
+    </template>
+    <template v-if="viewMode == 'ForgotPassword'">
+      <h2>{{$t('LOGIN.TITLE')}}</h2>
+      <h3>{{$t('LOGIN.SUBTITLE_FORGOT_PASSWORD')}}</h3>
+      <v-form v-model="valid">
+        <v-text-field
+          name="login"
+          prepend-icon="email"
+          :label="$t('LOGIN.FIELD_EMAIL')"
+          type="text"
+          v-model="userName"
+          :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
+        ></v-text-field>
+      </v-form>
+      <div>
+        <v-btn
+          text
+          @click="viewMode = 'SignIn'"
+          :disabled="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+        <v-btn
+          color="primary"
+          @click="forgot"
+          :disabled="!valid || loading"
+          :loading="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_FORGOT")}}</v-btn>
+      </div>
+    </template>
+    <template v-if="viewMode == 'Challenge'">
+      <h2>{{$t('LOGIN.TITLE')}}</h2>
+      <h3>{{$t('LOGIN.SUBTITLE_CHALLENGE')}}</h3>
+      <v-form v-model="valid">
+        <v-text-field
+          name="challengeCode"
+          prepend-icon="lock"
+          :label="$t('LOGIN.FIELD_CHALLENGE')"
+          type="text"
+          :rules="[ v => !!v || $t('LOGIN.CODE_REQUIRED')]"
+          v-model="challengeCode"
+          @keyup.enter.native="login"
+        ></v-text-field>
+        <template v-if="challenge">
           <v-text-field
-            prepend-icon="email"
-            name="login"
-            :label="$t('LOGIN.FIELD_EMAIL')"
-            type="text"
-            v-model="userName"
-            :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
-          ></v-text-field>
-          <v-text-field
-            id="password"
-            name="password"
-            prepend-icon="lock"
-            :label="$t('LOGIN.FIELD_PASSWORD')"
-            v-model="password"
-            :append-icon="showPassword ? 'visibility' : 'visibility_off'"
-            :type="showPassword ? 'text' : 'password'"
-            :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
-            @keyup.enter.native="login"
-            @click:append="showPassword = !showPassword"
-          ></v-text-field>
-          <v-switch v-model="rememberMe" :label="$t('LOGIN.REMEMBER_ME')"></v-switch>
-        </v-form>
-        <div style="clear:both">
-          <v-btn text :to="{name: 'register'}">{{$t("LOGIN.SIGNIN")}}</v-btn>
-          <v-btn text @click="viewMode = 'ForgotPassword'">{{$t("LOGIN.FORGOT_PASSWORD")}}</v-btn>
-          <v-btn
-            color="primary"
-            @click="login"
-            :disabled="!valid || loading"
-            :loading="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_LOGIN")}}</v-btn>
-        </div>        
-      </template>
-      <template v-if="viewMode == 'ForgotPassword'">
-        <h2>{{$t('LOGIN.TITLE')}}</h2>
-        <h3>{{$t('LOGIN.SUBTITLE_FORGOT_PASSWORD')}}</h3>
-        <v-form v-model="valid">
-          <v-text-field
-            name="login"
-            prepend-icon="email"
-            :label="$t('LOGIN.FIELD_EMAIL')"
-            type="text"
-            v-model="userName"
-            :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
-          ></v-text-field>
-        </v-form>
-        <div>
-          <v-btn
-            text
-            @click="viewMode = 'SignIn'"
-            :disabled="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
-          <v-btn
-            color="primary"
-            @click="forgot"
-            :disabled="!valid || loading"
-            :loading="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_FORGOT")}}</v-btn>
-        </div>
-      </template>
-      <template v-if="viewMode == 'Challenge'">
-        <h2>{{$t('LOGIN.TITLE')}}</h2>
-        <h3>{{$t('LOGIN.SUBTITLE_CHALLENGE')}}</h3>
-        <v-form v-model="valid">
-          <v-text-field
-            name="challengeCode"
-            prepend-icon="lock"
-            :label="$t('LOGIN.FIELD_CHALLENGE')"
-            type="text"
-            :rules="[ v => !!v || $t('LOGIN.CODE_REQUIRED')]"
-            v-model="challengeCode"
-            @keyup.enter.native="login"
-          ></v-text-field>
-          <template v-if="challenge">
-            <v-text-field
-              v-for="method in challenge.methods"
-              :key="method.method"
-              prepend-icon="cached"
-              :label="$t('LOGIN.TWOFACTOR_' + method.method.toUpperCase())"
-              type="text"
-              :readonly="true"
-              v-model="method.target"
-              append-icon="send"
-              @click:append="getChallengeCode(method.method)"
-            ></v-text-field>
-          </template>
-        </v-form>
-        <div>
-          <v-btn
-            text
-            @click="viewMode = 'SignIn'"
-            :disabled="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
-          <v-btn
-            color="primary"
-            @click="loginWithChallenge"
-            :disabled="!valid || loading"
-            :loading="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_LOGIN")}}</v-btn>
-        </div>
-      </template>
-      <template v-if="viewMode == 'AccountLocked'">
-        <h2>{{$t('LOGIN.TITLE')}}</h2>
-        <h3>{{$t('LOGIN.SUBTITLE_RESET_PASSWORD')}}</h3>
-        <h3>{{$t('LOGIN.ACCOUNT_LOCKED')}}</h3>
-        <v-form v-model="valid">
-          <v-text-field
-            name="login"
-            prepend-icon="email"
-            :label="$t('LOGIN.FIELD_EMAIL')"
+            v-for="method in challenge.methods"
+            :key="method.method"
+            prepend-icon="cached"
+            :label="$t('LOGIN.TWOFACTOR_' + method.method.toUpperCase())"
             type="text"
             :readonly="true"
-            v-model="userName"
-            :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
+            v-model="method.target"
+            append-icon="send"
+            @click:append="getChallengeCode(method.method)"
           ></v-text-field>
-        </v-form>
-        <div>
-          <v-btn
-            text
-            @click="viewMode = 'SignIn'"
-            :disabled="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
-          <v-btn
-            color="primary"
-            @click="sendActivation"
-            :disabled="!valid || loading"
-            :loading="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_SEND")}}</v-btn>
-        </div>
-      </template>
-      <template v-if="viewMode == 'ResetPassword'">
-        <h2>{{$t('LOGIN.TITLE')}}</h2>
-        <h3>{{$t('LOGIN.SUBTITLE_RESET_PASSWORD')}}</h3>
-        <v-form v-model="valid">
-          <v-text-field
-            id="newpassword"
-            name="newpassword"
-            prepend-icon="lock"
-            :label="$t('LOGIN.FIELD_NEW_PASSWORD')"
-            v-model="newPassword"
-            :append-icon="showPassword ? 'visibility' : 'visibility_off'"
-            :type="showPassword ? 'text' : 'password'"
-            :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
-            @click:append="showPassword = !showPassword"
-          ></v-text-field>
-          <v-text-field
-            id="newpassword2"
-            name="newpassword2"
-            prepend-icon="lock"
-            :label="$t('LOGIN.FIELD_NEW_PASSWORD_CHECK')"
-            v-model="newPasswordCheck"
-            :append-icon="showPassword ? 'visibility' : 'visibility_off'"
-            :type="showPassword ? 'text' : 'password'"
-            :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED'), v => v === newPassword || $t('LOGIN.PASSWORD_NOT_CHECK')]"
-            @click:append="showPassword = !showPassword"
-            @keyup.enter.native="reset"
-          ></v-text-field>
-        </v-form>
-        <div>
-          <v-btn
-            text
-            @click="viewMode = 'SignIn'"
-            :disabled="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
-          <v-btn
-            color="primary"
-            @click="reset"
-            :disabled="!valid || loading"
-            :loading="loading"
-            class="float-right"
-          >{{$t("LOGIN.BTN_RESET")}}</v-btn>
-        </div>
-      </template>    
+        </template>
+      </v-form>
+      <div>
+        <v-btn
+          text
+          @click="viewMode = 'SignIn'"
+          :disabled="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+        <v-btn
+          color="primary"
+          @click="loginWithChallenge"
+          :disabled="!valid || loading"
+          :loading="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_LOGIN")}}</v-btn>
+      </div>
+    </template>
+    <template v-if="viewMode == 'AccountLocked'">
+      <h2>{{$t('LOGIN.TITLE')}}</h2>
+      <h3>{{$t('LOGIN.SUBTITLE_RESET_PASSWORD')}}</h3>
+      <h3>{{$t('LOGIN.ACCOUNT_LOCKED')}}</h3>
+      <v-form v-model="valid">
+        <v-text-field
+          name="login"
+          prepend-icon="email"
+          :label="$t('LOGIN.FIELD_EMAIL')"
+          type="text"
+          :readonly="true"
+          v-model="userName"
+          :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
+        ></v-text-field>
+      </v-form>
+      <div>
+        <v-btn
+          text
+          @click="viewMode = 'SignIn'"
+          :disabled="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+        <v-btn
+          color="primary"
+          @click="sendActivation"
+          :disabled="!valid || loading"
+          :loading="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_SEND")}}</v-btn>
+      </div>
+    </template>
+    <template v-if="viewMode == 'ResetPassword'">
+      <h2>{{$t('LOGIN.TITLE')}}</h2>
+      <h3>{{$t('LOGIN.SUBTITLE_RESET_PASSWORD')}}</h3>
+      <v-form v-model="valid">
+        <v-text-field
+          id="newpassword"
+          name="newpassword"
+          prepend-icon="lock"
+          :label="$t('LOGIN.FIELD_NEW_PASSWORD')"
+          v-model="newPassword"
+          :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+          :type="showPassword ? 'text' : 'password'"
+          :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
+          @click:append="showPassword = !showPassword"
+        ></v-text-field>
+        <v-text-field
+          id="newpassword2"
+          name="newpassword2"
+          prepend-icon="lock"
+          :label="$t('LOGIN.FIELD_NEW_PASSWORD_CHECK')"
+          v-model="newPasswordCheck"
+          :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+          :type="showPassword ? 'text' : 'password'"
+          :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED'), v => v === newPassword || $t('LOGIN.PASSWORD_NOT_CHECK')]"
+          @click:append="showPassword = !showPassword"
+          @keyup.enter.native="reset"
+        ></v-text-field>
+      </v-form>
+      <div>
+        <v-btn
+          text
+          @click="viewMode = 'SignIn'"
+          :disabled="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+        <v-btn
+          color="primary"
+          @click="reset"
+          :disabled="!valid || loading"
+          :loading="loading"
+          class="float-right"
+        >{{$t("LOGIN.BTN_RESET")}}</v-btn>
+      </div>
+    </template>
   </v-container>
 </template>
 
@@ -202,7 +202,7 @@ type ViewMode =
   | "AccountLocked";
 
 @Component({
-  name: "Login",  
+  name: "Login"
 })
 export default class Login extends Vue {
   @Prop()
@@ -223,20 +223,12 @@ export default class Login extends Vue {
   private challenge: Challenge | null = null;
   private loading: boolean = false;
 
-  private googleParams: any = {};
-
-  private renderGoogleParams: any = {
-    width: 300,
-    height: 32,
-    longtitle: true
-  };
-
   public async mounted() {
     await this.$app.authService.TryAutoAuth();
     if (this.$app.authService.store.isAuthenticated) {
       this.$app.routerService.replace(this.$props.url);
     }
-  }  
+  }
 
   public async getChallengeCode(method: string) {
     try {
@@ -341,16 +333,15 @@ export default class Login extends Vue {
         this.$app.routerService.replace(this.$props.url);
       } catch (ex) {
         switch (ex.errorCode) {
-          case "DENIED_ACCESS":
-            {
-              this.$app.errorService.error("LogIn", {
-                errorCode: "",
-                errorMessage: this.$app.translationService.t(
-                  "LOGIN.CODE_INCORRECT"
-                )
-              });
-              return;
-            }            
+          case "DENIED_ACCESS": {
+            this.$app.errorService.error("LogIn", {
+              errorCode: "",
+              errorMessage: this.$app.translationService.t(
+                "LOGIN.CODE_INCORRECT"
+              )
+            });
+            return;
+          }
           case "AUTHENTICATION_PASSWORD_CHANGE":
             {
               this.viewMode = "ResetPassword";
