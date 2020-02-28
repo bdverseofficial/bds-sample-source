@@ -134,10 +134,9 @@ type Rules = Rule[];
   name: "Register"
 })
 export default class Register extends Vue {
-  @Prop()
-  url?: string;
   loading: boolean = false;
   valid: boolean = false;
+
   password2: string | null = null;
   password: string | null = null;
 
@@ -151,9 +150,7 @@ export default class Register extends Vue {
     personal: {
       mobilePhone: {}
     },
-    professional: {
-      workdPhone: {}
-    },
+    professional: {},
     address: {},
     type: "SAMPLE.Member"
   };
