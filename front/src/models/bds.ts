@@ -1,4 +1,4 @@
-import { Reference, BdsEntity, User, UserEvent, Address } from "@bdverse/bds-sdk-vue";
+import { Reference, BdsEntity, User } from "@bdverse/bds-sdk-vue";
 
 export interface SearchRequest {
     searchKey?: string;
@@ -39,27 +39,13 @@ export interface Personal {
     mobilePhone?: Phone;
 }
 
-export interface Company {
-    name?: string;
-}
-
 export interface Professional {
-    workdPhone?: Phone;
     jobTitle?: string;
-    company?: Company;
+    companyName?: string;
 }
 
-export interface Lead extends User {
+export interface Member extends User {
     personal?: Personal;
     professional?: Professional;
-    address?: Address;
-}
-
-export interface Account extends Lead {
-}
-
-export interface Person extends Account {
-}
-
-export interface Member extends Person {
+    preferedSport?: Reference;
 }
