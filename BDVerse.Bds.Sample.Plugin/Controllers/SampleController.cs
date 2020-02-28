@@ -2,13 +2,13 @@ using System.Threading.Tasks;
 using BDVerse.Bds.Sdk;
 using BDVerse.Bds.Sdk.Attributes;
 using BDVerse.Bds.Sdk.Controllers;
-using BDVerse.Bds.Sample.Plugin;
 using BDVerse.Bds.Sample.Plugin.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BDVerse.Bds.Sdk.Models;
-using BDVerse.Bds.Sdk.Models.Services;
 using BDVerse.Bds.Sample.Plugin.Models;
+using System.Collections.Generic;
+using BDVerse.Bds.Sdk.Services;
 
 namespace BDVerse.Bds.Sample.Plugin.Controllers
 {
@@ -26,14 +26,16 @@ namespace BDVerse.Bds.Sample.Plugin.Controllers
     public class SampleController : BdsBaseController
     {
         private readonly ISampleService sampleService;
+        private readonly IServerService server;
 
         /// <summary>
         /// Constructor of the controller, we get by injection the ISampleService
         /// </summary>
         /// <param name="sampleService"></param>
-        public SampleController(ISampleService sampleService)
+        public SampleController(ISampleService sampleService, IServerService server)
         {
-            this.sampleService = sampleService;            
+            this.sampleService = sampleService;
+            this.server = server;
         }
 
         /// <summary>
@@ -43,34 +45,37 @@ namespace BDVerse.Bds.Sample.Plugin.Controllers
         [Route("helloworld")]
         [HttpGet]
         [AllowAnonymous]
-        public Task<string> HelloWorld()
+        public string HelloWorld()
         {
-            return sampleService.HelloWorld();
-        }    
-
-        /// <summary>
-        /// Define the request expected
-        /// </summary>
-        public class RegisterRequest
-        {
-            public Member Member { get; set; }
-
-            public string Password { get; set; }
+            return "Hello World From the BDS Sample Plugin";
         }
 
         /// <summary>
-        /// Register a member
-        /// Can be replaced by using directly /api/cs/v1/b2ccustomer/registerCustomer in the CS plugin, in that case Member must inherit B2CCustomer
+        /// Load all sports
         /// </summary>
-        /// <param name="request"></param>
         /// <returns></returns>
-        [Route("register")]
-        [HttpPost]
+        [HttpGet]
+        [Route("all")]
         [AllowAnonymous]
-        public async Task<Member> Register([FromBody] RegisterRequest request)
+        public Task<IEnumerable<Sport>> GetSports()
         {
-            if (request == null) throw new ApiException(System.Net.HttpStatusCode.BadRequest, "REQUESTEMPTY", "Request is empty");            
-            return await sampleService.Register(request.Member, request.Password);
-        }              
+            return sampleService.GetSports();
+        }
+
+        /// <summary>
+        /// Update the size of a sport group
+        /// </summary>
+        /// <param name="sportId"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("updateSize/{sportId}/{size}")]  
+        [AllowAnonymous]
+        public async Task<Sport> UpdateSize(string sportId, int size)
+        {
+            var sport = await server.Entity.GetById<Sport>(sportId);
+            if (sport == null) throw new ApiException(System.Net.HttpStatusCode.NotFound, "SPORT_NOT_FOUND", $"Sport with id {sportId} was not found");
+            return await sampleService.ChangeSportGroupSize(sport, size);
+        }      
     }
 }

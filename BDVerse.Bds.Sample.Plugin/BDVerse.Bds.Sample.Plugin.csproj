@@ -1,14 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>$(HOME)/bds/server/plugins/$(AssemblyName)/</OutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>$(HOME)/bds/server/plugins/$(AssemblyName)/</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
-    <OutputPath>$(HOME)/bds/server/plugins/$(AssemblyName)/</OutputPath>
-  </PropertyGroup>
+  </PropertyGroup>  
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
@@ -27,12 +35,7 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BDVerse.Bds.Crm.Plugin.Sdk" Version="1.0.0-develop.455">
-      <Private>false</Private>
-      <PrivateAssets>All</PrivateAssets>
-      <IncludeAssets>compile</IncludeAssets>
-    </PackageReference>    
+  <ItemGroup>    
     <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0-develop.455">
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>

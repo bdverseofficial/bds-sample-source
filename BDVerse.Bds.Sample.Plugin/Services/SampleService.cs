@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BDVerse.Bds.Sample.Plugin.Models;
 using BDVerse.Bds.Sdk.Attributes;
@@ -24,49 +25,33 @@ namespace BDVerse.Bds.Sample.Plugin.Services
         public SampleService(IServerService server) 
         {
             this.server = server;                     
-        }
+        }       
 
         /// <summary>
-        /// The init client application to create a new System User API able to sign in our application
-        /// The token generated for this System User will be used by the client application to override the user rights
-        /// All call from the app providing this token will be executed with the rights of that API System User.
-        /// You can generate the token from the back office app in the Administration->User menu, Select the API user, on the right side, type the password, select the targeted app and generate an override API Token
+        /// Load all sports from the database.
+        /// This is a sample, do not use this in case of large dataset of data
         /// </summary>
         /// <returns></returns>
-        public Task InitClientApplication()
-        {            
-            return server.User.CreateSystemApiUser(SamplePlugin.APP_ID, SamplePlugin.API_USERNAME, SamplePlugin.API_USER_DISPLAYNAME, SamplePlugin.API_USER_PASSWORD);
-        }
-
-        /// <summary>
-        /// Typical HelloWorld
-        /// </summary>
-        /// <returns></returns>
-        public Task<string> HelloWorld() 
+        public Task<IEnumerable<Sport>> GetSports()
         {
-            return Task.FromResult("Hello World From the BDS Sample Plugin");
-        }      
+            return server.Entity.LoadAll<Sport>();
+        }
 
         /// <summary>
-        /// Register a member by using the default identity provider included in BDS
-        /// Add default roles for the app
-        /// No activation is requested
+        /// Update a sport size
         /// </summary>
-        /// <param name="member"></param>
-        /// <param name="password"></param>        
+        /// <param name="sport"></param>
+        /// <param name="size"></param>
         /// <returns></returns>
-        public async Task<Member> Register(Member member, string password)
-        {                        
-            if (member != null)
+        public async Task<Sport> ChangeSportGroupSize(Sport sport, int size)
+        {
+            if (sport == null) throw new BdsException("SPORT_IS_NULL", "Sport cannot be null to update the size");
+            if (size <= 0) throw new BdsException("INVALID_SIZE", "Size must be greater than zero");
+            return await server.Entity.UpdateAndSave(sport, s =>
             {
-                var application = await server.ClientApplication.GetAppConfig<ClientApplication>();
-                if (String.IsNullOrWhiteSpace(member.Email)) throw new BdsException("BAD_REQUEST", "The email can not be null");
-                server.User.AddUserRoleToSignIn(member, application.ToReferenceOrDefault());
-                member.IdentityProvider = IdentityProviderType.Default;
-                member.Password = password;               
-                return await server.User.RegisterUser(member, true, null);
-            }
-            return null;
-        }  
+                s.GroupSize = size;
+                return s;
+            });
+        }   
     }
 }

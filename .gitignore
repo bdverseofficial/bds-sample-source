@@ -269,3 +269,4 @@ __pycache__/
 **/_site/
 /data/catalog
 /data/catalog-old
+/BDVerse.Bds.Sample.Plugin/Properties/launchSettings.json

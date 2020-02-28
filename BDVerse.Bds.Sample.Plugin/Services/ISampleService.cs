@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BDVerse.Bds.Sample.Plugin.Models;
 using BDVerse.Bds.Sdk.Attributes;
@@ -10,11 +11,9 @@ namespace BDVerse.Bds.Sample.Plugin.Services
 
     [Service]
     public interface ISampleService
-    {
-        Task InitClientApplication();
+    {                
+        Task<IEnumerable<Sport>> GetSports();
 
-        Task<string> HelloWorld();    
-
-        Task<Member> Register(Member member, string password);
+        Task<Sport> ChangeSportGroupSize(Sport sport, int size);
     }
 }

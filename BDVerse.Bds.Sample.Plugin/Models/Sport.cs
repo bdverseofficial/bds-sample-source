@@ -10,7 +10,7 @@ namespace BDVerse.Bds.Sample.Plugin.Models
     /// Sample for a custom model, could have use the base PIM.Product instead
     /// This is demonstrating a model for full text search
     /// </summary>
-    [BdsObject("SAMPLE.Sport", CacheType = CacheType.Long, ViewName = nameof(Sport) + "s", DisplayPath = nameof(Name), FullTextSearch = Feature.Enable)]
+    [BdsObject("SAMPLE.Sport", CacheType = CacheType.Long, ViewName = nameof(Sport) + "s", DisplayPath = nameof(Name), FullTextSearch = Feature.Enable)]    
     public class Sport : BdsEntity
     {
         [Field(Section = "Identification", Weight = 1000, Search = Feature.Enable, SearchFullText = Feature.Enable)]

@@ -39,9 +39,9 @@ export class WebService {
 
     async initUser(user?: any): Promise<void> {
         this.store.userReady = false;
-        if (!this.store.ready) await this.init();        
+        if (!this.store.ready) await this.init();
         this.store.userReady = true;
-    }    
+    }
 
     async helloworld(options?: ApiRequestConfig): Promise<string | null> {
         const response = await this.apiService.get('api/sample/v1/helloworld', options);
@@ -49,24 +49,25 @@ export class WebService {
         return null;
     }
 
-    async register(member: Member, password: string,options?: ApiRequestConfig): Promise<Member | null> {
+    async register(member: Member, password: string, options?: ApiRequestConfig): Promise<Member | null> {
         const request = {
             member: member,
-            password: password
+            password: password,
+            identityProviderType: "Default",
         };
-        const response = await this.apiService.post('api/sample/v1/register', request, options);
+        const response = await this.apiService.post('api/bds/v1/users/register', request, options);
         if (response) return response.data;
         return null;
-    }  
-    
+    }
+
     public async search(request: any): Promise<SearchEntityResponse | null> {
         let options = {
             headers: {
                 filters: [
                     "Facet:name|localName",
                     "FacetValue:name|localName",
-                    "SAMPLE.SportCategory:name|localName",                    
-                    "SAMPLE.Sport:name|localName|id|groupType|groupSize",                    
+                    "SAMPLE.SportCategory:name|localName",
+                    "SAMPLE.Sport:name|localName|id|groupType|groupSize",
                 ]
             }
         };
