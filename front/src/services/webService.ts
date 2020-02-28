@@ -2,8 +2,6 @@ import { ApiService, RouterService, ConfigService, ApiRequestConfig } from "@bdv
 import { Member, SearchEntityResponse } from '@/models/bds';
 
 export interface WebStore {
-    ready?: boolean;
-    userReady?: boolean;
 }
 
 export interface WebOptions {
@@ -16,8 +14,6 @@ export class WebService {
     };
 
     public store: WebStore = {
-        ready: false,
-        userReady: false,
     };
 
     private apiService: ApiService;
@@ -29,18 +25,6 @@ export class WebService {
         this.routerService = routerService;
         this.configService = configService;
         this.options = options ? options : this.options;
-    }
-
-    async init(): Promise<void> {
-        if (!this.store.ready) {
-            this.store.ready = true;
-        }
-    }
-
-    async initUser(user?: any): Promise<void> {
-        this.store.userReady = false;
-        if (!this.store.ready) await this.init();
-        this.store.userReady = true;
     }
 
     async helloworld(options?: ApiRequestConfig): Promise<string | null> {

@@ -9,13 +9,13 @@ import { MessageService, MessageOptions } from './services/messageService';
 
 // Add more options to the BdsAppOptions
 export interface WebAppOptions extends BdsAppOptions {
-    web?: WebOptions;    
+    web?: WebOptions;
     message?: MessageOptions;
     dialog?: DialogOptions;
 }
 
 // Define a store for some data
-export interface WebAppStore {    
+export interface WebAppStore {
 }
 
 // Define the WebApp
@@ -26,12 +26,12 @@ export class WebApp extends BdsApp {
     // Define the messageService
     public messageService: MessageService;
     // Define the webService
-    public webService: WebService;    
+    public webService: WebService;
     // Expose the options
     public options: WebAppOptions;
 
     // Create the store
-    public store: WebAppStore = {        
+    public store: WebAppStore = {
     };
 
     // Create all needed services
@@ -40,7 +40,7 @@ export class WebApp extends BdsApp {
 
         this.messageService = new MessageService(this.configService, options.message);
         this.dialogService = new DialogService(this.configService, options.dialog);
-        this.webService = new WebService(this.apiService, this.routerService, this.configService, options.web);             
+        this.webService = new WebService(this.apiService, this.routerService, this.configService, options.web);
         this.options = options;
     }
 
@@ -55,17 +55,5 @@ export class WebApp extends BdsApp {
     async getLang(lang: string): Promise<LocaleMessageObject | undefined> {
         const response = await this.apiService.get('/lang/' + lang + '.json', { baseURL: '/' });
         return response.data as LocaleMessageObject;
-    }    
-
-    // Override the init of the BdsApp to initialize our own services
-    async init(): Promise<void> {
-        await super.init();
-        await this.webService.init();        
-    }
-
-    // Intercept the on Profile Changed to send the message to the webService
-    async onProfileChanged(): Promise<void> {
-        await super.onProfileChanged();
-        await this.webService.initUser(this.profileService.store.me);
     }
 }

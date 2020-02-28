@@ -1,14 +1,13 @@
 {
-    "appId": "SAMPLE",
-    "serverUrl": "http://localhost:9080/",
-    "apiToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNBTVBMRUFQSSIsInVwbiI6IlN5c3RlbVVzZXJ8MzJhZjdhYjUtZWZjZS00MDk5LWI1MjktZjZhNmU4OWMyZWFiIiwiZGV2aWNlaWQiOiIqIiwiY2xpZW50YXBwbGljYXRpb24iOiJTQU1QTEUiLCJpZHAiOiJEZWZhdWx0IiwibmJmIjoxNTgyNjYxNjM1LCJleHAiOjE2MTM3NjU2MzUsImlhdCI6MTU4MjY2MTYzNSwiaXNzIjoiQkRWZXJzZSBTQSIsImF1ZCI6Imh0dHA6Ly9iZHMvdG9rZW4ifQ.OFwJxVzhtUlQd5VyFzatEYUY3kfGL1VEpElz8HYk-vo",
-    "defaultLocale": "en",
-    "supportedLocale": [
-      "en",
-      "de",
-      "it",
-      "fr"
-    ],
-    "refreshTokenTimeSpanSecond": 20000,
-    "userTypeName": "SAMPLE.Member"    
-  }
+  "appId": "SAMPLE",
+  "serverUrl": "http://localhost:9080/",
+  "defaultLocale": "en",
+  "supportedLocale": [
+    "en",
+    "de",
+    "it",
+    "fr"
+  ],
+  "refreshTokenTimeSpanSecond": 20000,
+  "userTypeName": "SAMPLE.Member"
+}
