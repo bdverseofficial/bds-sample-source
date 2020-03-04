@@ -18,6 +18,10 @@ namespace Bds.Sample.Plugin.Controllers
     {
         private readonly ISampleService sampleService;
 
+        /// <summary>
+        /// We receive by injection the sampleService
+        /// </summary>
+        /// <param name="sampleService"></param>
         public SampleController(ISampleService sampleService)
             :base()
         {

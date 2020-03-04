@@ -13,6 +13,10 @@ namespace Bds.Sample.Plugin.Services
     {
         private readonly IServerService server;
 
+        /// <summary>
+        /// We recieve by injection the server service
+        /// </summary>
+        /// <param name="server"></param>
         public SampleService(IServerService server) 
         {
             this.server = server;
@@ -28,6 +32,11 @@ namespace Bds.Sample.Plugin.Services
             return server.Entity.LoadAll<Sport>();
         }
 
+        /// <summary>
+        /// Set the preferred sport to the current user
+        /// </summary>
+        /// <param name="sportId"></param>
+        /// <returns></returns>
         public async Task<Member> SetPreferredSport(string sportId) 
         {
             var me = server.Context.Identity.User?.Cast<Member>();
