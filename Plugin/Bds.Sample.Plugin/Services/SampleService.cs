@@ -33,11 +33,11 @@ namespace Bds.Sample.Plugin.Services
         }
 
         /// <summary>
-        /// Set the preferred sport on the current user
+        /// Set the preferred sport to the current user
         /// </summary>
-        /// <param name="sportId">the sport id</param>
-        /// <returns>the modifyed user</returns>
-        public async Task<Member> SetPreferredSport(string sportId)
+        /// <param name="sportId"></param>
+        /// <returns></returns>
+        public async Task<Member> SetPreferredSport(string sportId) 
         {
             var me = server.Context.Identity.User?.Cast<Member>();
             var sport = (await server.Entity.GetById<Sport>(sportId)).ToReferenceOrDefault();
