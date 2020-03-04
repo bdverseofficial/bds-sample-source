@@ -13,7 +13,11 @@ namespace Bds.Sample.Plugin.Services
     {
         private readonly IServerService server;
 
-        public SampleService(IServerService server) 
+        /// <summary>
+        /// By injection received the server service
+        /// </summary>
+        /// <param name="server"></param>
+        public SampleService(IServerService server)
         {
             this.server = server;
         }
@@ -28,13 +32,18 @@ namespace Bds.Sample.Plugin.Services
             return server.Entity.LoadAll<Sport>();
         }
 
-        public async Task<Member> SetPreferredSport(string sportId) 
+        /// <summary>
+        /// Set the preferred sport on the current user
+        /// </summary>
+        /// <param name="sportId">the sport id</param>
+        /// <returns>the modifyed user</returns>
+        public async Task<Member> SetPreferredSport(string sportId)
         {
             var me = server.Context.Identity.User?.Cast<Member>();
             var sport = (await server.Entity.GetById<Sport>(sportId)).ToReferenceOrDefault();
-            if (me != null && sport != null) 
+            if (me != null && sport != null)
             {
-                return await server.Entity.UpdateAndSave(me, (m) => { m.PreferredSport = sport; return m;});
+                return await server.Entity.UpdateAndSave(me, (m) => { m.PreferredSport = sport; return m; });
             }
             return null;
         }

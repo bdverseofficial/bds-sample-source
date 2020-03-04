@@ -11,6 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bds.Sample.Plugin.Controllers
 {
+    /// <summary>
+    /// our main controller for the app
+    /// we defined the base security to be on the User logged limited to the call fron this app with the role USER
+    /// </summary>
     [Route("/sample/v1")]
     [ApiExplorerSettings(GroupName = "SAMPLE")]
     [BdsAuthorize(Target = SecurityTarget.User, AppId = "SAMPLE", Roles = Constants.ROLE_USER)]
@@ -18,13 +22,17 @@ namespace Bds.Sample.Plugin.Controllers
     {
         private readonly ISampleService sampleService;
 
+        /// <summary>
+        /// The injection is giving us our service
+        /// </summary>
+        /// <param name="sampleService"></param>
         public SampleController(ISampleService sampleService)
-            :base()
+            : base()
         {
             this.sampleService = sampleService;
         }
 
-         /// <summary>
+        /// <summary>
         /// Our first operation available for all
         /// </summary>
         /// <returns></returns>
@@ -56,7 +64,7 @@ namespace Bds.Sample.Plugin.Controllers
         [HttpPut]
         [Route("updateSport/{sportId}")]
         public Task<Member> UpdateSport(string sportId)
-        {            
+        {
             return sampleService.SetPreferredSport(sportId);
         }
     }
