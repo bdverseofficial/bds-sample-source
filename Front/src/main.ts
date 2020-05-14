@@ -67,4 +67,5 @@ web.init().then(() => {
       router: web.routerService.router,
       render: (h) => h(App),
     }).$mount('#app');    
+    web.start(vue);
 });

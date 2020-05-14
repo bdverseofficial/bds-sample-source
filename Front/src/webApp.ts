@@ -40,7 +40,7 @@ export class WebApp extends BdsApp {
 
         this.messageService = new MessageService(this.configService, options.message);
         this.dialogService = new DialogService(this.configService, options.dialog);
-        this.webService = new WebService(this.apiService, this.routerService, this.profileService, this.configService, options.web);
+        this.webService = new WebService(this.apiService, this.searchService, this.routerService, this.profileService, this.configService, options.web);
         this.options = options;
     }
 

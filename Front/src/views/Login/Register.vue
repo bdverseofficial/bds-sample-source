@@ -120,7 +120,7 @@ export default class Register extends Vue {
     if (this.valid) {
       this.loading = true;
       try {
-        await this.$app.webService.register(this.member, this.password!);
+        await this.$app.profileService.registerUser(this.member, this.password!);
         this.$app.routerService.back();
       } finally {
         this.loading = false;

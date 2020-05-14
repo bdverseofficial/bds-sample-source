@@ -1,5 +1,5 @@
-import { ApiService, RouterService, ConfigService, ApiRequestConfig, ProfileService } from "@bdverse/bds-sdk-vue";
-import { Member, SearchEntityResponse, Sport } from '@/models/bds';
+import { ApiService, RouterService, ConfigService, ApiRequestConfig, ProfileService, SearchService, SearchEntityResponse } from "@bdverse/bds-sdk-vue";
+import { Member, Sport } from '@/models/bds';
 
 export interface WebStore {
 }
@@ -20,12 +20,14 @@ export class WebService {
     private routerService: RouterService;
     private configService: ConfigService;
     private profileService: ProfileService;
+    private searchService: SearchService;
 
-    constructor(apiService: ApiService, routerService: RouterService, profileService: ProfileService, configService: ConfigService, options?: WebOptions) {
+    constructor(apiService: ApiService, searchService: SearchService, routerService: RouterService, profileService: ProfileService, configService: ConfigService, options?: WebOptions) {
         this.apiService = apiService;
         this.routerService = routerService;
         this.configService = configService;
         this.profileService = profileService;
+        this.searchService = searchService;
         this.options = options ? options : this.options;
     }
 
@@ -42,18 +44,7 @@ export class WebService {
         const response = await this.apiService.get('api/sample/v1/helloworld', options);
         if (response) return response.data;
         return null;
-    }
-
-    public async register(member: Member, password: string, options?: ApiRequestConfig): Promise<Member | null> {
-        const request = {
-            user: member,
-            password: password,
-            identityProviderType: "Default",
-        };
-        const response = await this.apiService.post('api/bds/v1/users/register', request, options);
-        if (response) return response.data;
-        return null;
-    }
+    }   
 
     public async search(request: any): Promise<SearchEntityResponse | null> {
         let options = {
@@ -66,11 +57,6 @@ export class WebService {
                 ]
             }
         };
-        const response = await this.apiService.post(
-            "api/bds/v1/search",
-            request,
-            options
-        );
-        return response.data;
+        return await this.searchService.searchFullText(request, options);                    
     }
 }

@@ -16,20 +16,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Data\Plugin.SAMPLE.Facet.json">
+    <None Update="Data\01-Plugin.SAMPLE.Facet.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Plugin.SAMPLE.SAMPLE.SportCategory.json">
+    <None Update="Data\02-Plugin.SAMPLE.SAMPLE.SportCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Plugin.SAMPLE.SAMPLE.Sport.json">
+    <None Update="Data\03-Plugin.SAMPLE.SAMPLE.Sport.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0.0-develop.*">
+    <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0.0-beta.745">
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>
       <IncludeAssets>compile</IncludeAssets>

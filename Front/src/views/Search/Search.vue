@@ -106,8 +106,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
-import { SearchEntityResponse, SearchRequest, SearchItem, Sport } from "@/models/bds";
-import { ApiRequestConfig } from "@bdverse/bds-sdk-vue";
+import { Sport } from "@/models/bds";
+import { ApiRequestConfig, SearchEntityResponse, SearchRequest } from "@bdverse/bds-sdk-vue";
 import { ProfileStore } from '@bdverse/bds-sdk-vue/types/services/profileService';
 
 @Component({
