@@ -15,7 +15,7 @@ import Component from "vue-class-component";
 export default class Home extends Vue {
   helloworld: string | null = null;
 
-  async mounted() {
+  private async mounted(): Promise<void> {
     this.helloworld = await this.$app.webService.helloworld();
   }
 }

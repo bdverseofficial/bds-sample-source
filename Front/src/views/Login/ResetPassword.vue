@@ -53,7 +53,7 @@ export default class ResetPassword extends Vue {
   private password1: string = "";
   private password2: string = "";
 
-  get canResetPassword() {
+  private get canResetPassword() : unknown {
     return (
       this.password1 &&
       this.password2 &&
@@ -62,7 +62,7 @@ export default class ResetPassword extends Vue {
     );
   }
 
-  public async resetPassword() {
+  private async resetPassword(): Promise<void> {
     if (this.canResetPassword) {
       try {
         await this.$app.authService.resetPassword({
@@ -77,7 +77,7 @@ export default class ResetPassword extends Vue {
     }
   }
 
-  public async mounted() {
+  private async mounted(): Promise<void> {
     try {
       if (this.token) {
         let user = await this.$app.authService.validateCommunicationToken(

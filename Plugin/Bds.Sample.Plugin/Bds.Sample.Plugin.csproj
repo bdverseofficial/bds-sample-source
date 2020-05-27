@@ -29,7 +29,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0.0-beta.745">
+    <PackageReference Include="BDVerse.Bds.Sdk" Version="1.0.0.0-beta.815">
       <Private>false</Private>
       <PrivateAssets>All</PrivateAssets>
       <IncludeAssets>compile</IncludeAssets>

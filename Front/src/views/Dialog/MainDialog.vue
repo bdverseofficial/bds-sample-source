@@ -43,11 +43,11 @@ import { DialogBtn, DialogStore } from "../../services/dialogService";
 export default class MainDialog extends Vue {
   dialogStore: DialogStore | null = null;
 
-  created() {
+  private created(): void {
     this.dialogStore = this.$app.dialogService.store;
   }
 
-  close(button: DialogBtn): void {
+  private close(button: DialogBtn): void {
     this.$app.dialogService.close(button);
   }
 }

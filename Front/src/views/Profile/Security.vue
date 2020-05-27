@@ -214,8 +214,14 @@ import {
   Phone,
   TwoFactorAuthentication,
   Challenge,
-  ChallengeMethod
+  ChallengeMethod,
+  EnumValue,
+  BdsError
 } from "@bdverse/bds-sdk-vue";
+
+export interface SecurityException extends BdsError {
+  challenge?: Challenge;
+}
 
 @Component({
   name: "Security"
@@ -248,7 +254,7 @@ export default class Security extends Vue {
   phone: Phone | null = null;
   twoFactorAuthentication: TwoFactorAuthentication | null = null;
 
-  get booleanValues() {
+  private get booleanValues() : EnumValue[] {
     return [
       {
         label: this.$app.translationService.t("GLOBAL.TRUE"),
@@ -263,7 +269,7 @@ export default class Security extends Vue {
     ];
   }
 
-  get twoFactorMethods() {
+  private get twoFactorMethods() : EnumValue[] {
     return [
       {
         label: this.$app.translationService.t("LOGIN.TWOFACTOR_EMAIL"),
@@ -278,17 +284,17 @@ export default class Security extends Vue {
     ];
   }
 
-  methodName(item: ChallengeMethod) {
+  private methodName(item: ChallengeMethod): string {
     return this.$app.translationService.t(
       "PROFILE.FIELD_TWO_FACTOR_METHOD_" + item.method!.toUpperCase()
     );
   }
 
-  async mounted() {
+  private async mounted(): Promise<void> {
     await this.refresh();
   }
 
-  async refresh() {
+  private async refresh(): Promise<void> {
     if (this.$app.profileService.store.me) {
       let me = this.$app.profileService.store.me;
       this.login = me.login || null;
@@ -298,7 +304,7 @@ export default class Security extends Vue {
     }
   }
 
-  private async ManageException(ex: any) {
+  private async ManageException(ex: SecurityException): Promise<void> {
     switch (ex.errorCode) {
       case "AUTHENTICATION_TWO_FACTOR_NEEDED":
         {
@@ -322,12 +328,12 @@ export default class Security extends Vue {
     }
   }
 
-  private resetChallenge() {
+  private resetChallenge(): void{
     this.challenge = null;
     this.challengeMode = false;
   }
 
-  async updateLogin() {
+  private async updateLogin(): Promise<void> {
     if (this.login) {
       this.submitChallengeText = this.$app.translationService.t(
         "PROFILE.BTN_UPDATE_LOGIN"
@@ -360,7 +366,7 @@ export default class Security extends Vue {
     }
   }
 
-  async updateEmail() {
+  private async updateEmail(): Promise<void> {
     if (this.email) {
       this.submitChallengeText = this.$app.translationService.t(
         "PROFILE.BTN_UPDATE_EMAIL"
@@ -393,7 +399,7 @@ export default class Security extends Vue {
     }
   }
 
-  async updatePassword() {
+  private async updatePassword(): Promise<void> {
     if (this.oldPassword && this.newPassword) {
       this.submitChallengeText = this.$app.translationService.t(
         "PROFILE.BTN_UPDATE_PASSWORD"
@@ -427,7 +433,7 @@ export default class Security extends Vue {
     }
   }
 
-  async updatePhone() {
+  private async updatePhone(): Promise<void> {
     if (this.phone) {
       this.submitChallengeText = this.$app.translationService.t(
         "PROFILE.BTN_UPDATE_PHONE"
@@ -460,7 +466,7 @@ export default class Security extends Vue {
     }
   }
 
-  async updateTwoFactor(event: any) {
+  private async updateTwoFactor(event: any): Promise<void> {
     if (this.twoFactorAuthentication) {
       this.submitChallengeText = this.$app.translationService.t(
         "PROFILE.BTN_UPDATE_TWO_FACTOR"

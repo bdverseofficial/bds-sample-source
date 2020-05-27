@@ -92,7 +92,7 @@ import { Member } from "@/models/bds";
 import { Reference, BdsEntity, User } from "@bdverse/bds-sdk-vue";
 import PageLayout from "../PageLayout.vue";
 
-type Rule = (value: object) => boolean | string;
+type Rule = (value: any) => boolean | string;
 type Rules = Rule[];
 
 @Component({
@@ -116,7 +116,7 @@ export default class Register extends Vue {
     type: "SAMPLE.Member"
   };
 
-  async register() {
+  private async register(): Promise<void> {
     if (this.valid) {
       this.loading = true;
       try {

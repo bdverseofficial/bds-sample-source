@@ -19,7 +19,7 @@ export default class Activation extends Vue {
 
   loading = false;
 
-  async mounted() {
+  private async mounted(): Promise<void> {
     try {
       this.loading = true;
       await this.$app.authService.activation(this.token!);

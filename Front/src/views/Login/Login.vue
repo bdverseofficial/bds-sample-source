@@ -223,14 +223,14 @@ export default class Login extends Vue {
   private challenge: Challenge | null = null;
   private loading: boolean = false;
 
-  public async mounted() {
+  private async mounted(): Promise<void> {
     await this.$app.authService.TryAutoAuth();
     if (this.$app.authService.store.isAuthenticated) {
       this.$app.routerService.replace(this.$props.url);
     }
   }
 
-  public async getChallengeCode(method: string) {
+  private async getChallengeCode(method: string): Promise<void> {
     try {
       this.loading = true;
       let response = await this.$app.authService.getChallengeCode({
@@ -246,7 +246,7 @@ export default class Login extends Vue {
     }
   }
 
-  public async sendActivation() {
+  private async sendActivation(): Promise<void> {
     try {
       this.loading = true;
       await this.$app.authService.sendActivation({
@@ -260,7 +260,7 @@ export default class Login extends Vue {
     }
   }
 
-  public async forgot() {
+  private async forgot(): Promise<void> {
     try {
       this.loading = true;
       await this.$app.authService.forgotPassword({
@@ -274,7 +274,7 @@ export default class Login extends Vue {
     }
   }
 
-  public async reset() {
+  private async reset(): Promise<void> {
     if (
       this.valid &&
       this.newPassword &&
@@ -307,7 +307,7 @@ export default class Login extends Vue {
     }
   }
 
-  public async loginWithChallenge() {
+  private async loginWithChallenge(): Promise<void> {
     if (
       this.valid &&
       this.password &&
@@ -360,7 +360,7 @@ export default class Login extends Vue {
     }
   }
 
-  public async login() {
+  private async login(): Promise<void> {
     if (this.valid && this.password && this.userName) {
       try {
         this.loading = true;

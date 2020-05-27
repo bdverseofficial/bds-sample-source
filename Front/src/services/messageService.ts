@@ -42,7 +42,7 @@ export class MessageService {
         this.store.currentMessage = undefined;
     }
 
-    message(message: string, closetext?: string, timeout?: number) {
+    message(message: string, closetext?: string, timeout?: number): void {
         this.store.currentMessage = {
             show: true,
             message: message,
@@ -55,7 +55,7 @@ export class MessageService {
         };
     }
 
-    close(button: MessageBtn) {
+    close(button: MessageBtn): void {
         if (this.store.currentMessage) {
             this.store.currentMessage.show = false;
         }

@@ -1,4 +1,4 @@
-import { ApiService, RouterService, ConfigService, ApiRequestConfig, ProfileService, SearchService, SearchEntityResponse } from "@bdverse/bds-sdk-vue";
+import { ApiService, RouterService, ConfigService, ApiRequestConfig, ProfileService, SearchService, SearchEntityResponse, SearchRequest, SearchEntityRequest } from "@bdverse/bds-sdk-vue";
 import { Member, Sport } from '@/models/bds';
 
 export interface WebStore {
@@ -46,7 +46,7 @@ export class WebService {
         return null;
     }   
 
-    public async search(request: any): Promise<SearchEntityResponse | null> {
+    public async search(request: SearchEntityRequest): Promise<SearchEntityResponse | null> {
         let options = {
             headers: {
                 filters: [

@@ -107,7 +107,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
 import { Sport } from "@/models/bds";
-import { ApiRequestConfig, SearchEntityResponse, SearchRequest } from "@bdverse/bds-sdk-vue";
+import { ApiRequestConfig, SearchEntityResponse, SearchRequest, SearchEntityRequest } from "@bdverse/bds-sdk-vue";
 import { ProfileStore } from '@bdverse/bds-sdk-vue/types/services/profileService';
 
 @Component({
@@ -130,7 +130,7 @@ export default class Search extends Vue {
   @Prop()
   sort?: string;
 
-  request: SearchRequest = {
+  request: SearchEntityRequest = {
     limit: 20,
     imLucky: true,
     scroll: true
@@ -160,21 +160,21 @@ export default class Search extends Vue {
     }
   ];
 
-  async mounted() {
+  async mounted(): Promise<void> {
     this.profileStore = this.$app.profileService.store;
     await this.refreshSearch();
   }
 
   @Watch("$route")
-  async watchRoute() {
+  async watchRoute(): Promise<void> {
     await this.refreshSearch();
   }
 
-  async updateSport(sport: Sport) {
+  async updateSport(sport: Sport): Promise<void> {
     await this.$app.webService.setPreferredSport(sport);
   }
 
-  async refreshSearch() {
+  async refreshSearch(): Promise<void> {
     if (this.result) {
       this.result.scrollId = undefined;
       this.result.items = [];   
@@ -182,14 +182,14 @@ export default class Search extends Vue {
     await this.internalSearch();
   }  
 
-  openSearchForQuery(query?: string, sort?: string) {
+  openSearchForQuery(query?: string, sort?: string) : void {
     this.$app.routerService.push({
       name: "Search",
       query: { q: query, s: sort }
     });
   }
 
-  search(uri: string) {
+  search(uri: string) : void {
     this.openSearchForQuery(uri, this.sortChoice);
   }
 

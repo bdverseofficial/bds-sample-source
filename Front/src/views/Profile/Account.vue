@@ -121,11 +121,11 @@ export default class Account extends Vue {
   valid: boolean = false;
   loading: boolean = false;
 
-  mounted() {
-    this.refresh();
+  private async mounted(): Promise<void> {
+    await this.refresh();
   }
 
-  get cultures(): Reference[] | null {
+  private get cultures(): Reference[] | null {
     return [
       { id: "en-US", displayName: "English (US)" },
       { id: "fr-FR", displayName: "French (FR)" },
@@ -134,13 +134,13 @@ export default class Account extends Vue {
     ];
   }
 
-  get countries(): Reference[] | null {
+  private get countries(): Reference[] | null {
     return this.$app.bdsService.toReferencesOrDefault(
       this.$app.bdsService.store.countries
     );
   }
 
-  async refresh() {
+  private async refresh(): Promise<void> {
     if (this.$app.profileService.store.me) {
       let me = this.$app.profileService.store.me;
       this.account = {
@@ -157,7 +157,7 @@ export default class Account extends Vue {
     }
   }
 
-  async update() {
+  private async update(): Promise<void> {
     if (this.account) {
       try {
         this.loading = true;

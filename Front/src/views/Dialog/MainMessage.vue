@@ -31,11 +31,11 @@ import {
 export default class MainMessage extends Vue {
   messageStore: MessageStore | null = null;
 
-  created() {
+  private created(): void {
     this.messageStore = this.$app.messageService.store;
   }
 
-  close(button: MessageBtn): void {
+  private close(button: MessageBtn): void {
     this.$app.messageService.close(button);
   }
 }

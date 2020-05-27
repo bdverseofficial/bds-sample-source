@@ -78,7 +78,7 @@ export class DialogService {
         });
     }
 
-    close(button: DialogBtn) {
+    close(button: DialogBtn): void {
         if (this.store.currentDialog) {
             this.store.currentDialog.show = false;
             if (button.result !== true) {

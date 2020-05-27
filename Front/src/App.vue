@@ -112,20 +112,20 @@ export default class App extends Vue {
   drawer: boolean | null = null;
   options: WebAppOptions | null = null;
 
-  created() {
+  private created(): void {
     this.profileStore = this.$app.profileService.store;
     this.webStore = this.$app.webService.store;
     this.appStore = this.$app.store;
     this.options = this.$app.options;
   }
 
-  async signOut() {
+  private async signOut(): Promise<void> {
     this.$app.loadingService.usingLoading({}, async () => {
       await this.$app.authService.signOut(false);
     });
   } 
 
-  async changeLang(locale: string) {
+  private async changeLang(locale: string): Promise<void> {
     await this.$app.setLocale(locale);
     window.location.reload();
   }
