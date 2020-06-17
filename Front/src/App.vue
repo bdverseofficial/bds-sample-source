@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <v-app class="main-layout" heigth="100%">
-      <v-content>
+      <v-main>
         <template v-if="$app.ready">
           <transition name="el-fade-in-linear" appear>
             <v-container fluid pa-0 ma-0 full-height>
@@ -87,7 +87,7 @@
         </template>
         <MainDialog></MainDialog>
         <MainMessage></MainMessage>
-      </v-content>
+      </v-main>
     </v-app>
   </div>
 </template>
