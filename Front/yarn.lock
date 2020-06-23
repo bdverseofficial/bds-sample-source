@@ -980,10 +980,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bdverse/bds-sdk-vue@^1.0.0-beta.161":
-  version "1.0.0-beta.161"
-  resolved "https://registry.yarnpkg.com/@bdverse/bds-sdk-vue/-/bds-sdk-vue-1.0.0-beta.161.tgz#32a8fb2afc438c666112c88aecbb02a4ee87ca2c"
-  integrity sha512-KoX92Vdq4XBAKO5YqhfGl4M0MeSl+3h6Q6SbIaNP3yP2uy9+pgRBSX4FFT4BbY2HnMC4vJZ6pJV1kcENHcmuFQ==
+"@bdverse/bds-sdk-vue@^1.0.0-beta.163":
+  version "1.0.0-beta.163"
+  resolved "https://registry.yarnpkg.com/@bdverse/bds-sdk-vue/-/bds-sdk-vue-1.0.0-beta.163.tgz#4bd11d8a0735565d1d13af59b32a0c521db8b760"
+  integrity sha512-WX2lSCaaBZdJO8oJN+oQRFc8D17x3T/fDt89fZbX5YXd7ZTEV6y6TzuyrgxLMssD9YWvyahJJUffh1UlTisbcQ==
   dependencies:
     "@microsoft/signalr" "^3.1.5"
     axios "^0.19.2"
