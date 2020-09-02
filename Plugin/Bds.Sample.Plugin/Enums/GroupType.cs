@@ -8,7 +8,7 @@ namespace Bds.Sample.Plugin.Enums
     /// Demonstrate how to define a custom enum
     /// We could have also used a traditionnal enum, but that way, this is allowing other plugin to extend that enum by adding new values.
     /// </summary>
-    [Enum(Name = "SAMPLE.GroupType")]
+    [Enum("SAMPLE.GroupType")]
     public class GroupType : EnumValue
     {
         public static readonly GroupType Solo = new GroupType() { Value = 1000001, Code = "SOLO", Label = "Solo" };
