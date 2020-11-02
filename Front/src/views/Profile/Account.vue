@@ -8,7 +8,11 @@
       </v-row>
       <v-row>
         <v-col cols="6" xs="12">
-          <v-text-field prepend-icon="edit" :label="$t('USER.FIELD_TITLE')" v-model="account.title"></v-text-field>
+          <v-text-field
+            prepend-icon="edit"
+            :label="$t('USER.FIELD_TITLE')"
+            v-model="account.title"
+          ></v-text-field>
         </v-col>
         <v-col cols="6" xs="12">
           <v-text-field
@@ -100,7 +104,8 @@
             @click="update"
             :loading="loading"
             class="float-right"
-          >{{$t("PROFILE.BTN_UPDATE_ACCOUNT")}}</v-btn>
+            >{{ $t("PROFILE.BTN_UPDATE_ACCOUNT") }}</v-btn
+          >
         </v-col>
       </v-row>
     </v-container>
@@ -111,10 +116,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
-import { User, Reference } from "@bdverse/bds-sdk-vue";
+import { User, Reference } from "@bdverse/bds-sdk";
 
 @Component({
-  name: "Account"
+  name: "Account",
 })
 export default class Account extends Vue {
   account: User | null = null;
@@ -130,7 +135,7 @@ export default class Account extends Vue {
       { id: "en-US", displayName: "English (US)" },
       { id: "fr-FR", displayName: "French (FR)" },
       { id: "it-IT", displayName: "Italian (IT)" },
-      { id: "de-DE", displayName: "German (DE)" }
+      { id: "de-DE", displayName: "German (DE)" },
     ];
   }
 
@@ -152,7 +157,7 @@ export default class Account extends Vue {
         middleName: me.middleName,
         culture: me.culture,
         address: me.address || {},
-        lastName: me.lastName
+        lastName: me.lastName,
       };
     }
   }

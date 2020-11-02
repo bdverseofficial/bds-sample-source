@@ -1,8 +1,8 @@
 <template>
   <v-container pa-6 ma-6>
     <template v-if="viewMode == 'SignIn'">
-      <h2>{{$t('LOGIN.TITLE')}}</h2>
-      <h3>{{$t('LOGIN.SUBTITLE_LOGIN')}}</h3>
+      <h2>{{ $t("LOGIN.TITLE") }}</h2>
+      <h3>{{ $t("LOGIN.SUBTITLE_LOGIN") }}</h3>
       <v-form v-model="valid">
         <v-text-field
           prepend-icon="email"
@@ -10,7 +10,7 @@
           :label="$t('LOGIN.FIELD_EMAIL')"
           type="text"
           v-model="userName"
-          :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
+          :rules="[(v) => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
         ></v-text-field>
         <v-text-field
           id="password"
@@ -20,27 +20,33 @@
           v-model="password"
           :append-icon="showPassword ? 'visibility' : 'visibility_off'"
           :type="showPassword ? 'text' : 'password'"
-          :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
+          :rules="[(v) => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
           @keyup.enter.native="login"
           @click:append="showPassword = !showPassword"
         ></v-text-field>
-        <v-switch v-model="rememberMe" :label="$t('LOGIN.REMEMBER_ME')"></v-switch>
+        <v-switch
+          v-model="rememberMe"
+          :label="$t('LOGIN.REMEMBER_ME')"
+        ></v-switch>
       </v-form>
-      <div style="clear:both">
-        <v-btn text :to="{name: 'register'}">{{$t("LOGIN.SIGNIN")}}</v-btn>
-        <v-btn text @click="viewMode = 'ForgotPassword'">{{$t("LOGIN.FORGOT_PASSWORD")}}</v-btn>
+      <div style="clear: both">
+        <v-btn text :to="{ name: 'register' }">{{ $t("LOGIN.SIGNIN") }}</v-btn>
+        <v-btn text @click="viewMode = 'ForgotPassword'">{{
+          $t("LOGIN.FORGOT_PASSWORD")
+        }}</v-btn>
         <v-btn
           color="primary"
           @click="login"
           :disabled="!valid || loading"
           :loading="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_LOGIN")}}</v-btn>
+          >{{ $t("LOGIN.BTN_LOGIN") }}</v-btn
+        >
       </div>
     </template>
     <template v-if="viewMode == 'ForgotPassword'">
-      <h2>{{$t('LOGIN.TITLE')}}</h2>
-      <h3>{{$t('LOGIN.SUBTITLE_FORGOT_PASSWORD')}}</h3>
+      <h2>{{ $t("LOGIN.TITLE") }}</h2>
+      <h3>{{ $t("LOGIN.SUBTITLE_FORGOT_PASSWORD") }}</h3>
       <v-form v-model="valid">
         <v-text-field
           name="login"
@@ -48,7 +54,7 @@
           :label="$t('LOGIN.FIELD_EMAIL')"
           type="text"
           v-model="userName"
-          :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
+          :rules="[(v) => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
         ></v-text-field>
       </v-form>
       <div>
@@ -57,26 +63,28 @@
           @click="viewMode = 'SignIn'"
           :disabled="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+          >{{ $t("LOGIN.BTN_CANCEL") }}</v-btn
+        >
         <v-btn
           color="primary"
           @click="forgot"
           :disabled="!valid || loading"
           :loading="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_FORGOT")}}</v-btn>
+          >{{ $t("LOGIN.BTN_FORGOT") }}</v-btn
+        >
       </div>
     </template>
     <template v-if="viewMode == 'Challenge'">
-      <h2>{{$t('LOGIN.TITLE')}}</h2>
-      <h3>{{$t('LOGIN.SUBTITLE_CHALLENGE')}}</h3>
+      <h2>{{ $t("LOGIN.TITLE") }}</h2>
+      <h3>{{ $t("LOGIN.SUBTITLE_CHALLENGE") }}</h3>
       <v-form v-model="valid">
         <v-text-field
           name="challengeCode"
           prepend-icon="lock"
           :label="$t('LOGIN.FIELD_CHALLENGE')"
           type="text"
-          :rules="[ v => !!v || $t('LOGIN.CODE_REQUIRED')]"
+          :rules="[(v) => !!v || $t('LOGIN.CODE_REQUIRED')]"
           v-model="challengeCode"
           @keyup.enter.native="login"
         ></v-text-field>
@@ -100,20 +108,22 @@
           @click="viewMode = 'SignIn'"
           :disabled="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+          >{{ $t("LOGIN.BTN_CANCEL") }}</v-btn
+        >
         <v-btn
           color="primary"
           @click="loginWithChallenge"
           :disabled="!valid || loading"
           :loading="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_LOGIN")}}</v-btn>
+          >{{ $t("LOGIN.BTN_LOGIN") }}</v-btn
+        >
       </div>
     </template>
     <template v-if="viewMode == 'AccountLocked'">
-      <h2>{{$t('LOGIN.TITLE')}}</h2>
-      <h3>{{$t('LOGIN.SUBTITLE_RESET_PASSWORD')}}</h3>
-      <h3>{{$t('LOGIN.ACCOUNT_LOCKED')}}</h3>
+      <h2>{{ $t("LOGIN.TITLE") }}</h2>
+      <h3>{{ $t("LOGIN.SUBTITLE_RESET_PASSWORD") }}</h3>
+      <h3>{{ $t("LOGIN.ACCOUNT_LOCKED") }}</h3>
       <v-form v-model="valid">
         <v-text-field
           name="login"
@@ -122,7 +132,7 @@
           type="text"
           :readonly="true"
           v-model="userName"
-          :rules="[ v => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
+          :rules="[(v) => !!v || $t('LOGIN.EMAIL_REQUIRED')]"
         ></v-text-field>
       </v-form>
       <div>
@@ -131,19 +141,21 @@
           @click="viewMode = 'SignIn'"
           :disabled="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+          >{{ $t("LOGIN.BTN_CANCEL") }}</v-btn
+        >
         <v-btn
           color="primary"
           @click="sendActivation"
           :disabled="!valid || loading"
           :loading="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_SEND")}}</v-btn>
+          >{{ $t("LOGIN.BTN_SEND") }}</v-btn
+        >
       </div>
     </template>
     <template v-if="viewMode == 'ResetPassword'">
-      <h2>{{$t('LOGIN.TITLE')}}</h2>
-      <h3>{{$t('LOGIN.SUBTITLE_RESET_PASSWORD')}}</h3>
+      <h2>{{ $t("LOGIN.TITLE") }}</h2>
+      <h3>{{ $t("LOGIN.SUBTITLE_RESET_PASSWORD") }}</h3>
       <v-form v-model="valid">
         <v-text-field
           id="newpassword"
@@ -153,7 +165,7 @@
           v-model="newPassword"
           :append-icon="showPassword ? 'visibility' : 'visibility_off'"
           :type="showPassword ? 'text' : 'password'"
-          :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
+          :rules="[(v) => !!v || $t('LOGIN.PASSWORD_REQUIRED')]"
           @click:append="showPassword = !showPassword"
         ></v-text-field>
         <v-text-field
@@ -164,7 +176,10 @@
           v-model="newPasswordCheck"
           :append-icon="showPassword ? 'visibility' : 'visibility_off'"
           :type="showPassword ? 'text' : 'password'"
-          :rules="[ v => !!v || $t('LOGIN.PASSWORD_REQUIRED'), v => v === newPassword || $t('LOGIN.PASSWORD_NOT_CHECK')]"
+          :rules="[
+            (v) => !!v || $t('LOGIN.PASSWORD_REQUIRED'),
+            (v) => v === newPassword || $t('LOGIN.PASSWORD_NOT_CHECK'),
+          ]"
           @click:append="showPassword = !showPassword"
           @keyup.enter.native="reset"
         ></v-text-field>
@@ -175,14 +190,16 @@
           @click="viewMode = 'SignIn'"
           :disabled="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+          >{{ $t("LOGIN.BTN_CANCEL") }}</v-btn
+        >
         <v-btn
           color="primary"
           @click="reset"
           :disabled="!valid || loading"
           :loading="loading"
           class="float-right"
-        >{{$t("LOGIN.BTN_RESET")}}</v-btn>
+          >{{ $t("LOGIN.BTN_RESET") }}</v-btn
+        >
       </div>
     </template>
   </v-container>
@@ -192,7 +209,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { BdsError, Challenge } from "@bdverse/bds-sdk-vue";
+import { BdsError, Challenge } from "@bdverse/bds-sdk";
 
 type ViewMode =
   | "SignIn"
@@ -202,7 +219,7 @@ type ViewMode =
   | "AccountLocked";
 
 @Component({
-  name: "Login"
+  name: "Login",
 })
 export default class Login extends Vue {
   @Prop()
@@ -236,7 +253,7 @@ export default class Login extends Vue {
       let response = await this.$app.authService.getChallengeCode({
         userName: this.userName!,
         password: this.password!,
-        method: method
+        method: method,
       });
       if (response) {
         this.challenge = response;
@@ -250,7 +267,7 @@ export default class Login extends Vue {
     try {
       this.loading = true;
       await this.$app.authService.sendActivation({
-        userName: this.userName!
+        userName: this.userName!,
       });
       this.viewMode = "SignIn";
     } catch {
@@ -264,7 +281,7 @@ export default class Login extends Vue {
     try {
       this.loading = true;
       await this.$app.authService.forgotPassword({
-        userName: this.userName!
+        userName: this.userName!,
       });
       this.viewMode = "SignIn";
     } catch {
@@ -286,9 +303,9 @@ export default class Login extends Vue {
           {
             login: {
               userName: this.userName!,
-              password: this.password!
+              password: this.password!,
             },
-            password: this.newPassword!
+            password: this.newPassword!,
           },
           { silentError: true }
         );
@@ -324,8 +341,8 @@ export default class Login extends Vue {
             challenge: {
               hash: this.challenge.hash,
               date: this.challenge.date,
-              code: this.challengeCode
-            }
+              code: this.challengeCode,
+            },
           },
           this.rememberMe,
           { silentError: true }
@@ -338,7 +355,7 @@ export default class Login extends Vue {
               errorCode: "",
               errorMessage: this.$app.translationService.t(
                 "LOGIN.CODE_INCORRECT"
-              )
+              ),
             });
             return;
           }
@@ -367,7 +384,7 @@ export default class Login extends Vue {
         await this.$app.authService.signIn(
           {
             userName: this.userName!,
-            password: this.password!
+            password: this.password!,
           },
           this.rememberMe,
           { silentError: true }
@@ -397,7 +414,7 @@ export default class Login extends Vue {
             {
               this.$app.errorService.error("Log In", {
                 errorCode: "",
-                errorMessage: this.$app.translationService.t("LOGIN.FAILED")
+                errorMessage: this.$app.translationService.t("LOGIN.FAILED"),
               });
               this.userName = null;
               this.password = null;

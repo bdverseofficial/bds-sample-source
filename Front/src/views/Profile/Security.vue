@@ -13,7 +13,7 @@
               prepend-icon="account_box"
               :label="$t('USER.FIELD_LOGIN')"
               v-model="login"
-              :rules="[ v => !!v || $t('PROFILE.LOGIN_REQUIRED')]"
+              :rules="[(v) => !!v || $t('PROFILE.LOGIN_REQUIRED')]"
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -23,7 +23,8 @@
               @click="updateLogin"
               :loading="loginLoading"
               class="float-right"
-            >{{$t("PROFILE.BTN_UPDATE_LOGIN")}}</v-btn>
+              >{{ $t("PROFILE.BTN_UPDATE_LOGIN") }}</v-btn
+            >
           </v-col>
         </v-row>
       </v-form>
@@ -34,7 +35,7 @@
               prepend-icon="email"
               :label="$t('USER.FIELD_EMAIL')"
               v-model="email"
-              :rules="[ v => !!v || $t('PROFILE.EMAIL_REQUIRED')]"
+              :rules="[(v) => !!v || $t('PROFILE.EMAIL_REQUIRED')]"
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -44,7 +45,8 @@
               @click="updateEmail"
               :loading="emailLoading"
               class="float-right"
-            >{{$t("PROFILE.BTN_UPDATE_EMAIL")}}</v-btn>
+              >{{ $t("PROFILE.BTN_UPDATE_EMAIL") }}</v-btn
+            >
           </v-col>
         </v-row>
       </v-form>
@@ -58,7 +60,7 @@
               item-text="phoneExtensionName"
               item-value="phoneExtension"
               menu-props="auto"
-              :rules="[ v => !!v || $t('PROFILE.PHONE_REQUIRED')]"
+              :rules="[(v) => !!v || $t('PROFILE.PHONE_REQUIRED')]"
               v-model="phone.countryPhoneExt"
             ></v-select>
           </v-col>
@@ -68,7 +70,7 @@
               :label="$t('USER.FIELD_MOBILE_PHONE')"
               type="text"
               v-model="phone.number"
-              :rules="[ v => !!v || $t('PROFILE.PHONE_REQUIRED')]"
+              :rules="[(v) => !!v || $t('PROFILE.PHONE_REQUIRED')]"
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -78,7 +80,8 @@
               @click="updatePhone()"
               :loading="phoneLoading"
               class="float-right"
-            >{{$t("PROFILE.BTN_UPDATE_PHONE")}}</v-btn>
+              >{{ $t("PROFILE.BTN_UPDATE_PHONE") }}</v-btn
+            >
           </v-col>
         </v-row>
       </v-form>
@@ -113,7 +116,8 @@
               @click="updateTwoFactor"
               :loading="twoFactorLoading"
               class="float-right"
-            >{{$t("PROFILE.BTN_UPDATE_TWO_FACTOR")}}</v-btn>
+              >{{ $t("PROFILE.BTN_UPDATE_TWO_FACTOR") }}</v-btn
+            >
           </v-col>
         </v-row>
       </v-form>
@@ -127,7 +131,7 @@
               :append-icon="showPassword ? 'visibility' : 'visibility_off'"
               :type="showPassword ? 'text' : 'password'"
               @click:append="showPassword = !showPassword"
-              :rules="[ v => !!v || $t('PROFILE.PASSWORD_REQUIRED')]"
+              :rules="[(v) => !!v || $t('PROFILE.PASSWORD_REQUIRED')]"
             ></v-text-field>
           </v-col>
           <v-col cols="6" xs="12"></v-col>
@@ -139,7 +143,7 @@
               :append-icon="showPassword ? 'visibility' : 'visibility_off'"
               :type="showPassword ? 'text' : 'password'"
               @click:append="showPassword = !showPassword"
-              :rules="[ v => !!v || $t('PROFILE.PASSWORD_REQUIRED')]"
+              :rules="[(v) => !!v || $t('PROFILE.PASSWORD_REQUIRED')]"
             ></v-text-field>
           </v-col>
           <v-col cols="6" xs="12">
@@ -150,7 +154,10 @@
               :append-icon="showPassword ? 'visibility' : 'visibility_off'"
               :type="showPassword ? 'text' : 'password'"
               @click:append="showPassword = !showPassword"
-              :rules="[ v => !!v || $t('PROFILE.PASSWORD_REQUIRED'), v => v === newPassword || $t('PROFILE.PASSWORD_NOT_CHECK')]"
+              :rules="[
+                (v) => !!v || $t('PROFILE.PASSWORD_REQUIRED'),
+                (v) => v === newPassword || $t('PROFILE.PASSWORD_NOT_CHECK'),
+              ]"
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -160,7 +167,8 @@
               @click="updatePassword"
               :loading="passwordLoading"
               class="float-right"
-            >{{$t("PROFILE.BTN_UPDATE_PASSWORD")}}</v-btn>
+              >{{ $t("PROFILE.BTN_UPDATE_PASSWORD") }}</v-btn
+            >
           </v-col>
         </v-row>
       </v-form>
@@ -174,12 +182,17 @@
               :label="$t('PROFILE.FIELD_CHALLENGE')"
               type="text"
               prepend-icon="lock"
-              :rules="[ v => !!v || $t('PROFILE.CODE_REQUIRED')]"
+              :rules="[(v) => !!v || $t('PROFILE.CODE_REQUIRED')]"
               v-model="challengeCode"
             ></v-text-field>
           </v-col>
           <template v-if="challenge">
-            <v-col cols="12" xs="12" v-for="method in challenge.methods" :key="method.method">
+            <v-col
+              cols="12"
+              xs="12"
+              v-for="method in challenge.methods"
+              :key="method.method"
+            >
               <v-text-field
                 :label="$t('LOGIN.TWOFACTOR_' + method.method.toUpperCase())"
                 type="text"
@@ -191,14 +204,17 @@
             </v-col>
           </template>
           <v-col cols="12">
-            <v-btn text @click="challengeMode = false">{{$t('PROFILE.CANCEL')}}</v-btn>
+            <v-btn text @click="challengeMode = false">{{
+              $t("PROFILE.CANCEL")
+            }}</v-btn>
             <v-btn
               color="primary"
               :disabled="!challengeValid"
               @click="submitChallengeFunction"
               :loading="challengeLoading"
               class="float-right"
-            >{{submitChallengeText}}</v-btn>
+              >{{ submitChallengeText }}</v-btn
+            >
           </v-col>
         </v-row>
       </v-form>
@@ -216,15 +232,15 @@ import {
   Challenge,
   ChallengeMethod,
   EnumValue,
-  BdsError
-} from "@bdverse/bds-sdk-vue";
+  BdsError,
+} from "@bdverse/bds-sdk";
 
 export interface SecurityException extends BdsError {
   challenge?: Challenge;
 }
 
 @Component({
-  name: "Security"
+  name: "Security",
 })
 export default class Security extends Vue {
   loginValid: boolean = false;
@@ -254,33 +270,33 @@ export default class Security extends Vue {
   phone: Phone | null = null;
   twoFactorAuthentication: TwoFactorAuthentication | null = null;
 
-  private get booleanValues() : EnumValue[] {
+  private get booleanValues(): EnumValue[] {
     return [
       {
         label: this.$app.translationService.t("GLOBAL.TRUE"),
         code: "true",
-        value: true
+        value: true,
       },
       {
         label: this.$app.translationService.t("GLOBAL.FALSE"),
         code: "false",
-        value: false
-      }
+        value: false,
+      },
     ];
   }
 
-  private get twoFactorMethods() : EnumValue[] {
+  private get twoFactorMethods(): EnumValue[] {
     return [
       {
         label: this.$app.translationService.t("LOGIN.TWOFACTOR_EMAIL"),
         code: "Email",
-        value: "Email"
+        value: "Email",
       },
       {
         label: this.$app.translationService.t("LOGIN.TWOFACTOR_SMS"),
         code: "SMS",
-        value: "SMS"
-      }
+        value: "SMS",
+      },
     ];
   }
 
@@ -328,7 +344,7 @@ export default class Security extends Vue {
     }
   }
 
-  private resetChallenge(): void{
+  private resetChallenge(): void {
     this.challenge = null;
     this.challengeMode = false;
   }
@@ -345,16 +361,16 @@ export default class Security extends Vue {
             ? {
                 hash: this.challenge.hash,
                 date: this.challenge.date,
-                code: this.challengeCode
+                code: this.challengeCode,
               }
             : undefined,
-        login: this.login
+        login: this.login,
       };
       try {
         this.challengeLoading = true;
         this.loginLoading = true;
         await this.$app.profileService.updateLogin(loginRequest, {
-          silentError: true
+          silentError: true,
         });
         this.resetChallenge();
       } catch (ex) {
@@ -378,16 +394,16 @@ export default class Security extends Vue {
             ? {
                 hash: this.challenge.hash,
                 date: this.challenge.date,
-                code: this.challengeCode
+                code: this.challengeCode,
               }
             : undefined,
-        email: this.email
+        email: this.email,
       };
       try {
         this.challengeLoading = true;
         this.emailLoading = true;
         await this.$app.profileService.updateEmail(emailRequest, {
-          silentError: true
+          silentError: true,
         });
         this.resetChallenge();
       } catch (ex) {
@@ -411,17 +427,17 @@ export default class Security extends Vue {
             ? {
                 hash: this.challenge.hash,
                 date: this.challenge.date,
-                code: this.challengeCode
+                code: this.challengeCode,
               }
             : undefined,
         oldPassword: this.oldPassword,
-        newPassword: this.newPassword
+        newPassword: this.newPassword,
       };
       try {
         this.challengeLoading = true;
         this.passwordLoading = true;
         await this.$app.profileService.updatePassword(passwordRequest, {
-          silentError: true
+          silentError: true,
         });
         this.resetChallenge();
       } catch (ex) {
@@ -445,16 +461,16 @@ export default class Security extends Vue {
             ? {
                 hash: this.challenge.hash,
                 date: this.challenge.date,
-                code: this.challengeCode
+                code: this.challengeCode,
               }
             : undefined,
-        phone: this.phone
+        phone: this.phone,
       };
       try {
         this.challengeLoading = true;
         this.phoneLoading = true;
         await this.$app.profileService.updatePhone(phoneRequest, {
-          silentError: true
+          silentError: true,
         });
         this.resetChallenge();
       } catch (ex) {
@@ -478,16 +494,16 @@ export default class Security extends Vue {
             ? {
                 hash: this.challenge.hash,
                 date: this.challenge.date,
-                code: this.challengeCode
+                code: this.challengeCode,
               }
             : undefined,
-        twoFactorAuthentication: this.twoFactorAuthentication
+        twoFactorAuthentication: this.twoFactorAuthentication,
       };
       try {
         this.challengeLoading = true;
         this.twoFactorLoading = true;
         await this.$app.profileService.updateTwoFactor(twoFactorRequest, {
-          silentError: true
+          silentError: true,
         });
         this.resetChallenge();
       } catch (ex) {

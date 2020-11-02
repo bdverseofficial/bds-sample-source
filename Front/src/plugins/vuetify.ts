@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import colors from 'vuetify/lib/util/colors';
-import VueI18n from 'vue-i18n';
 import en from 'vuetify/src/locale/en';
 import { VuetifyPreset } from 'vuetify/types/services/presets';
 
@@ -11,7 +10,7 @@ export default class BdsVuetify {
 
     vuetify: any;
 
-    constructor(i18n: VueI18n) {
+    constructor() {
         this.vuetify = new Vuetify({
             lang: {
                 current: 'en'

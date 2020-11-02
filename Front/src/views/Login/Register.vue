@@ -1,7 +1,7 @@
 <template>
   <v-container pa-6 ma-6>
-    <h2>{{$t('REGISTER.TITLE')}}</h2>
-    <h3>{{$t('REGISTER.SUBTITLE')}}</h3>
+    <h2>{{ $t("REGISTER.TITLE") }}</h2>
+    <h3>{{ $t("REGISTER.SUBTITLE") }}</h3>
     <v-form v-model="valid">
       <v-container fluid>
         <v-row>
@@ -10,7 +10,7 @@
               name="firstName"
               :label="$t('USER.FIELD_FIRST_NAME')"
               type="text"
-              :rules="[ v => !!v || 'First Name is required']"
+              :rules="[(v) => !!v || 'First Name is required']"
               v-model="member.firstName"
             ></v-text-field>
           </v-col>
@@ -19,19 +19,22 @@
               name="lastName"
               :label="$t('USER.FIELD_LAST_NAME')"
               type="text"
-              :rules="[ v => !!v || 'Last Name is required']"
+              :rules="[(v) => !!v || 'Last Name is required']"
               v-model="member.lastName"
             ></v-text-field>
-          </v-col>         
+          </v-col>
           <v-col cols="12">
             <v-text-field
               name="email"
               :label="$t('USER.FIELD_EMAIL')"
               type="text"
-              :rules="[ v => !!v || 'E-mail is required',  v => /.+@.+\..+/.test(v) || 'E-mail must be valid' ]"
+              :rules="[
+                (v) => !!v || 'E-mail is required',
+                (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+              ]"
               v-model="member.email"
             ></v-text-field>
-          </v-col>         
+          </v-col>
           <v-col cols="12">
             <v-select
               name="country"
@@ -40,7 +43,7 @@
               item-text="displayName"
               item-value="id"
               return-object
-              :rules="[ v => !!v || 'Country is required']"
+              :rules="[(v) => !!v || 'Country is required']"
               v-model="member.address.country"
             ></v-select>
           </v-col>
@@ -58,7 +61,10 @@
               id="password2"
               name="password2"
               :label="$t('REGISTER.FIELD_PASSWORD_REPEAT')"
-              :rules="[ v => !!v || 'Password is required', v => v === password || 'Password are not matching' ]"
+              :rules="[
+                (v) => !!v || 'Password is required',
+                (v) => v === password || 'Password are not matching',
+              ]"
               type="password"
               v-model="password2"
             ></v-text-field>
@@ -72,14 +78,16 @@
         @click="$app.routerService.back()"
         :disabled="loading"
         class="float-right"
-      >{{$t("LOGIN.BTN_CANCEL")}}</v-btn>
+        >{{ $t("LOGIN.BTN_CANCEL") }}</v-btn
+      >
       <v-btn
         color="primary"
         :loading="loading"
         :disabled="!valid"
         @click="register"
         class="float-right"
-      >{{$t("REGISTER.BTN_REGISTER")}}</v-btn>
+        >{{ $t("REGISTER.BTN_REGISTER") }}</v-btn
+      >
     </div>
   </v-container>
 </template>
@@ -89,14 +97,14 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { Member } from "@/models/bds";
-import { Reference, BdsEntity, User } from "@bdverse/bds-sdk-vue";
+import { Reference, BdsEntity, User } from "@bdverse/bds-sdk";
 import PageLayout from "../PageLayout.vue";
 
 type Rule = (value: any) => boolean | string;
 type Rules = Rule[];
 
 @Component({
-  name: "Register"
+  name: "Register",
 })
 export default class Register extends Vue {
   loading: boolean = false;
@@ -111,16 +119,19 @@ export default class Register extends Vue {
     );
   }
 
-  private member: Member = {  
+  private member: Member = {
     address: {},
-    type: "SAMPLE.Member"
+    type: "SAMPLE.Member",
   };
 
   private async register(): Promise<void> {
     if (this.valid) {
       this.loading = true;
       try {
-        await this.$app.profileService.registerUser(this.member, this.password!);
+        await this.$app.profileService.registerUser(
+          this.member,
+          this.password!
+        );
         this.$app.routerService.back();
       } finally {
         this.loading = false;
