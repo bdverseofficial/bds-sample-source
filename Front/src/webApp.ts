@@ -29,7 +29,7 @@ export class WebApp extends BdsVueApp {
     constructor(options: WebAppOptions) {
         super(options);
 
-        this.webService = new WebService(this.apiService, this.searchService, this.profileService, options.web);
+        this.webService = new WebService(this.apiService, this.configService, this.searchService, this.profileService, this.genericEntityService, options.web);
         this.options = options;
     }
 }

@@ -6,4 +6,5 @@ export interface Sport extends BdsEntity {
 
 export interface Member extends User {
     preferedSport?: Reference;
+    syncLoginWithEmail?: boolean;
 }

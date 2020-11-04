@@ -8,8 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@bdverse/bds-sdk": "^1.0.0-beta.77",
-    "@bdverse/bds-sdk-vue": "^1.0.0-beta.167",
+    "@bdverse/bds-sdk": "1.0.0-beta.81",
+    "@bdverse/bds-sdk-vue": "1.0.0-beta.171",    
+    "vue-i18n": "^8.18.2",    
+    "@microsoft/signalr": "^3.1.9",
+    "axios": "^0.21.0",
+    "fingerprintjs2": "^2.1.2",    
     "core-js": "^3.6.5",
     "lodash": "^4.17.20",
     "vue": "^2.6.12",

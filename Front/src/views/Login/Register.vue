@@ -128,6 +128,7 @@ export default class Register extends Vue {
     if (this.valid) {
       this.loading = true;
       try {
+        this.member.syncLoginWithEmail = true;
         await this.$app.profileService.registerUser(
           this.member,
           this.password!

@@ -1,0 +1,86 @@
+[
+    {
+        "id": "ROOT",
+        "name": "Sports",
+        "localName": {
+            "en": "Sports"
+        }
+    },   
+    {
+        "id": "INDOOR",
+        "name": "Indoor",
+        "localName": {
+            "en": "Indoor"
+        },
+        "parent": {
+            "id": "ROOT",
+            "type": "SAMPLE.SportCategory"
+        }
+    },    
+    {
+        "id": "INDOOR.WATER",
+        "name": "Water",
+        "localName": {
+            "en": "Water"
+        },
+        "parent": {
+            "id": "INDOOR",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "INDOOR.FIELD",
+        "name": "Field",
+        "localName": {
+            "en": "Field"
+        },
+        "parent": {
+            "id": "OUTDOOR",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "OUTDOOR",
+        "name": "Outdoor",
+        "localName": {
+            "en": "Outdoor"
+        },
+        "parent": {
+            "id": "ROOT",
+            "type": "SAMPLE.SportCategory"
+        }
+    },    
+    {
+        "id": "OUTDOOR.SNOW",
+        "name": "Snow",
+        "localName": {
+            "en": "Snow"
+        },
+        "parent": {
+            "id": "OUTDOOR",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "OUTDOOR.WATER",
+        "name": "Water",
+        "localName": {
+            "en": "Water"
+        },
+        "parent": {
+            "id": "OUTDOOR",
+            "type": "SAMPLE.SportCategory"
+        }
+    },
+    {
+        "id": "OUTDOOR.FIELD",
+        "name": "Field",
+        "localName": {
+            "en": "Field"
+        },
+        "parent": {
+            "id": "OUTDOOR",
+            "type": "SAMPLE.SportCategory"
+        }
+    }
+]

@@ -1,7 +1,9 @@
 {
   "appId": "SAMPLE",
-  "serverUrl": "http://localhost:9080/",
+  "serverUrl": "https://localhost:9443/",
   "defaultLocale": "en",
+  "apiToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFwaS5zeXN0ZW1AZW1haWwuY29tIiwidXBuIjoiU3lzdGVtVXNlcnxkNjA2YzYzYy01M2FhLTQ4N2ItYjlhOS02Y2I5ZTg2MjIwMzYiLCJlbWFpbCI6ImFwaS5zeXN0ZW1AZW1haWwuY29tIiwiZGV2aWNlaWQiOiIqIiwiY2xpZW50YXBwbGljYXRpb24iOiJTQU1QTEUiLCJpZHAiOiJEZWZhdWx0IiwibmJmIjoxNjA0MzQ1MDg0LCJleHAiOjE2MzU0NDU0OTQsImlhdCI6MTYwNDM0NTA5NCwiaXNzIjoiQkRWZXJzZSBTQSIsImF1ZCI6Imh0dHA6Ly9iZHMvc2lnbmluIn0.immQ4Og_u6CadfYjqrwLSocuw-NnxKv8TgnZMGrPNYU",
+  "useApiTokenAsAnonymousSignIn": true,
   "supportedLocale": [
     "en",
     "de",

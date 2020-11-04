@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Plugin Id="SAMPLE" Name="Sample">
+  <ClientApplication Name="Sample" Id="SAMPLE" UserTypes="SAMPLE.Member" AllowSignInApiToken="true"/>  
+  <DashBoard Default="true">
+    <Element Entity="SAMPLE.Member"/>
+    <Element Entity="SAMPLE.SportCategory"/>
+    <Element Entity="SAMPLE.Sport"/>
+  </DashBoard>  
+  <EnumType Name="SAMPLE.GroupType">
+    <Value Value="1000001" Code="SOLO" Label="Solo"/>
+    <Value Value="1000002" Code="DUAL" Label="Dual"/>
+    <Value Value="1000003" Code="GROUP" Label="Group"/>
+    <Value Value="1000004" Code="TEAM" Label="Team"/>
+  </EnumType>
+   <Object Name="SAMPLE.SportCategory" HiddenFromParent="Enable" CacheType="Long" ViewName="Categories" ObjectType="Record" Base="Group">
+  </Object>
+  <Object Name="SAMPLE.Sport" CacheType="Long" Viewname="Sports" ObjectType="Record" FullTextSearch="Enable">
+    <Field FieldName="Name" Type="Text" SearchFullText="Enable"/>    
+    <Field FieldName="LocalName" Type="LocalizedText" SearchFullText="Enable"/>    
+    <Field FieldName="Category" Type="Ref" RefType="SAMPLE.SportCategory" SearchFullTextGroup="Enable"/>
+    <Field FieldName="GroupType" Type="Enum" RefType="SAMPLE.GroupType" SearchFullTextFacet="Enable" SearchFullTextFacetId="sample.sport.groupType"/>
+    <Field FieldName="GroupSize" Type="Integer" SearchFullTextFilter="Enable"/>
+  </Object> 
+  <Object Name="SAMPLE.Member" CacheType="Long" ViewName="Members" Base="User" ObjectType="Record">
+    <Field FieldName="PreferredSport" Type="Ref" RefType="SAMPLE.Sport" />
+  </Object>
+</Plugin>

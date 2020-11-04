@@ -1095,27 +1095,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bdverse/bds-sdk-vue@^1.0.0-beta.167":
-  version "1.0.0-beta.167"
-  resolved "https://registry.yarnpkg.com/@bdverse/bds-sdk-vue/-/bds-sdk-vue-1.0.0-beta.167.tgz#f758aaa699ae23e8db1d5e6654aef5edba38ed52"
-  integrity sha512-6hkxYa1l/tSmgTbLtSn87KVNLZVW2HiJsM7dAd+k4PGRkYI98CQ3GUYdfmoRTJ5F06mZvMW/1MrpRIqkGdKmgw==
-  dependencies:
-    "@bdverse/bds-sdk" "1.0.0-beta.77"
-    vue "^2.6.12"
-    vue-class-component "^7.2.6"
-    vue-i18n "^8.18.2"
-    vue-property-decorator "^9.0.0"
-    vue-router "^3.3.4"
+"@bdverse/bds-sdk-vue@1.0.0-beta.171":
+  version "1.0.0-beta.171"
+  resolved "https://pkgs.dev.azure.com/bdverse/_packaging/bdverse/npm/registry/@bdverse/bds-sdk-vue/-/bds-sdk-vue-1.0.0-beta.171.tgz#a971dba1b197097ebf7ce89f453a386de7391e31"
+  integrity sha1-qXHbobGXCX6/fOifRTo4bec5HjE=
 
-"@bdverse/bds-sdk@1.0.0-beta.77", "@bdverse/bds-sdk@^1.0.0-beta.77":
-  version "1.0.0-beta.77"
-  resolved "https://registry.yarnpkg.com/@bdverse/bds-sdk/-/bds-sdk-1.0.0-beta.77.tgz#1747f91cd1795c78d43ea056b360eb0a0bbc576b"
-  integrity sha512-njWLMZOr1BWxSPry3Gs3TFdRVFgyLcvvUW6NwM+jgGMdxnUyvvhL+FPAwKKynv0QlTMb4r6rKrJ0wrHveViHrw==
-  dependencies:
-    "@microsoft/signalr" "^3.1.9"
-    axios "^0.21.0"
-    fingerprintjs2 "^2.1.2"
-    lodash "^4.17.20"
+"@bdverse/bds-sdk@1.0.0-beta.81":
+  version "1.0.0-beta.81"
+  resolved "https://pkgs.dev.azure.com/bdverse/_packaging/bdverse/npm/registry/@bdverse/bds-sdk/-/bds-sdk-1.0.0-beta.81.tgz#5e747f79de284ab9566e3b13da2f7ee9ba49d260"
+  integrity sha1-XnR/ed4oSrlWbjsT2i9+6bpJ0mA=
 
 "@eslint/eslintrc@^0.2.1":
   version "0.2.1"
@@ -1176,8 +1164,8 @@
 
 "@microsoft/signalr@^3.1.9":
   version "3.1.9"
-  resolved "https://registry.yarnpkg.com/@microsoft/signalr/-/signalr-3.1.9.tgz#334b39e03aff7f9aabfccb42f827fa3e8ccac1ca"
-  integrity sha512-67wJ6m++4vz+9JBTVgROoPuAkjmRK6tFUZhaL5bDwC7vAzOHFTyc8bjx6RaxxPT9tf+/+gmAglkxhiI8YrXZMQ==
+  resolved "https://pkgs.dev.azure.com/bdverse/_packaging/bdverse/npm/registry/@microsoft/signalr/-/signalr-3.1.9.tgz#334b39e03aff7f9aabfccb42f827fa3e8ccac1ca"
+  integrity sha1-M0s54Dr/f5qr/MtC+Cf6PozKwco=
   dependencies:
     eventsource "^1.0.7"
     request "^2.88.0"
@@ -2332,8 +2320,8 @@ aws4@^1.8.0:
 
 axios@^0.21.0:
   version "0.21.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.0.tgz#26df088803a2350dff2c27f96fef99fe49442aca"
-  integrity sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
+  resolved "https://pkgs.dev.azure.com/bdverse/_packaging/bdverse/npm/registry/axios/-/axios-0.21.0.tgz#26df088803a2350dff2c27f96fef99fe49442aca"
+  integrity sha1-Jt8IiAOiNQ3/LCf5b++Z/klEKso=
   dependencies:
     follow-redirects "^1.10.0"
 
@@ -4612,8 +4600,8 @@ find-up@^4.0.0, find-up@^4.1.0:
 
 fingerprintjs2@^2.1.2:
   version "2.1.2"
-  resolved "https://registry.yarnpkg.com/fingerprintjs2/-/fingerprintjs2-2.1.2.tgz#d4812e627356f04b279c63b995b72591b2ab5ed5"
-  integrity sha512-ZPsLgjziFRbUb5tXWpEMtWp4XFnzSah8SiNfl3aoURDZ+2zi2tuIOYUULqDBV+Cb6paN+raWT+Q2qpOaCbX/Yw==
+  resolved "https://pkgs.dev.azure.com/bdverse/_packaging/bdverse/npm/registry/fingerprintjs2/-/fingerprintjs2-2.1.2.tgz#d4812e627356f04b279c63b995b72591b2ab5ed5"
+  integrity sha1-1IEuYnNW8EsnnGO5lbclkbKrXtU=
 
 flat-cache@^2.0.1:
   version "2.0.1"
@@ -4646,8 +4634,8 @@ follow-redirects@^1.0.0:
 
 follow-redirects@^1.10.0:
   version "1.13.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
-  integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
+  resolved "https://pkgs.dev.azure.com/bdverse/_packaging/bdverse/npm/registry/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
+  integrity sha1-tC6Nk6Kn7qXtiGM2dtZZe8jjhNs=
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -9638,9 +9626,9 @@ vue-hot-reload-api@^2.3.0:
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
 vue-i18n@^8.18.2:
-  version "8.18.2"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.18.2.tgz#cd7c12f2e178e6faa23b0e3cfd2f7bac9305f8fc"
-  integrity sha512-0X5nBTCZAVjlwcrPaYJwNs3iipBBTv0AUHwQUOa8yP3XbQGWKbRHqBb3OhCYtum/IHDD21d/df5Xd2VgyxbxfA==
+  version "8.22.1"
+  resolved "https://pkgs.dev.azure.com/bdverse/_packaging/bdverse/npm/registry/vue-i18n/-/vue-i18n-8.22.1.tgz#b9dd098a17e1f5adb91bdf9611f0385310da7cb1"
+  integrity sha1-ud0Jihfh9a25G9+WEfA4UxDafLE=
 
 "vue-loader-v16@npm:vue-loader@^16.0.0-beta.7":
   version "16.0.0-beta.9"
@@ -9662,15 +9650,10 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-property-decorator@^9.0.0, vue-property-decorator@^9.0.2:
+vue-property-decorator@^9.0.2:
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-9.0.2.tgz#118459d77b4d5613ab2bbccba2edd5d7af685d30"
   integrity sha512-mxuJHfUGs/3rUyFj2vykDIvYXCUKBrzhemm7mT8dE9QYTbNA/4qVQ5gwhNCIkKyQc8RQIXQ+0jriqinUDuuU9w==
-
-vue-router@^3.3.4:
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.3.4.tgz#4e38abc34a11c41b6c3d8244449a2e363ba6250b"
-  integrity sha512-SdKRBeoXUjaZ9R/8AyxsdTqkOfMcI5tWxPZOUX5Ie1BTL5rPSZ0O++pbiZCeYeythiZIdLEfkDiQPKIaWk5hDg==
 
 vue-router@^3.4.8:
   version "3.4.8"
