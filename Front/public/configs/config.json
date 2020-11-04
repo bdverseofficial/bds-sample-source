@@ -11,5 +11,6 @@
     "fr"
   ],
   "refreshTokenTimeSpanSecond": 20000,
-  "userTypeName": "SAMPLE.Member"
+  "userTypeName": "SAMPLE.Member",
+  "pluginMode": false
 }
